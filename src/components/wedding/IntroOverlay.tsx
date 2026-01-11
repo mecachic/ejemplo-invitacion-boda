@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import envelopeImage from '@/assets/envelope-closed.jpg';
+import envelopeClosed from '@/assets/envelope-closed.jpg';
 
 interface IntroOverlayProps {
   onComplete: () => void;
@@ -64,11 +65,16 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
               animate={isClicked ? { scale: 1.1, opacity: 0 } : { scale: 1, opacity: 1 }}
               transition={{ duration: 2, ease: 'easeInOut' }}
             >
-              <img
-                src={envelopeImage}
-                alt="Wedding Invitation Envelope"
-                className="w-full h-full object-cover"
-              />
+            <video
+              ref={videoRef}             
+              className="w-full h-full object-cover"
+              playsInline
+              preload="auto"
+              muted
+              onEnded={handleComplete}   
+            >
+              <source src={envelopeVideo} type="video/mp4" />
+            </video>
               
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-charcoal/30" />
