@@ -1,12 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import IntroOverlay from '@/components/wedding/IntroOverlay';
+import HeroSection from '@/components/wedding/HeroSection';
+import CountdownSection from '@/components/wedding/CountdownSection';
+import DetailsSection from '@/components/wedding/DetailsSection';
+import TimelineSection from '@/components/wedding/TimelineSection';
+import AccommodationSection from '@/components/wedding/AccommodationSection';
+import FAQSection from '@/components/wedding/FAQSection';
+import GiftsSection from '@/components/wedding/GiftsSection';
+import RSVPSection from '@/components/wedding/RSVPSection';
+import Footer from '@/components/wedding/Footer';
 
 const Index = () => {
+  const [showIntro, setShowIntro] = useState(true);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {/* Cinematic Intro Overlay */}
+      {showIntro && <IntroOverlay onComplete={handleIntroComplete} />}
+
+      {/* Main Website Content */}
+      <main>
+        <HeroSection />
+        <CountdownSection />
+        <DetailsSection />
+        <TimelineSection />
+        <AccommodationSection />
+        <FAQSection />
+        <GiftsSection />
+        <RSVPSection />
+        <Footer />
+      </main>
     </div>
   );
 };
