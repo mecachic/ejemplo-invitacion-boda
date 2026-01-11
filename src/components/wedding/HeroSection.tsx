@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import petalsImage from '@/assets/petals-bg.jpg';
+import petalsVideo from '@/assets/petals-hero.mp4';
 
 const HeroSection = () => {
   return (
@@ -12,15 +13,15 @@ const HeroSection = () => {
           className="w-full h-full object-cover"
         />
         {/* For actual video, uncomment below:
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/path-to-video.mp4" type="video/mp4" />
-        </video>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="w-full h-full object-cover"
+      >
+        <source src={petalsVideo} type="video/mp4" />
+      </video>
         */}
       </div>
 
