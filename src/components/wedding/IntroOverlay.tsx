@@ -1,35 +1,30 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import envelopePoster from "@/assets/envelope-closed.jpg";
-import envelopeVideo from "@/assets/envelope-hero.mp4"; // ajusta el nombre/ruta real
+import envelopeVideo from "@/assets/envelope-intro.mp4";
 
 interface IntroOverlayProps {
   onComplete: () => void;
 }
 
 const EXIT_DELAY_MS = 800;
-const FALLBACK_DURATION_MS = 2000;
 
 const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
-  const [videoError, setVideoError] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const fallbackTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     document.body.classList.add("scroll-locked");
     return () => {
       document.body.classList.remove("scroll-locked");
-      if (fallbackTimerRef.current) window.clearTimeout(fallbackTimerRef.current);
     };
   }, []);
 
   const finish = () => {
     setIsExiting(true);
-    window.setTimeout(() => {
+    setTimeout(() => {
       document.body.classList.remove("scroll-locked");
       onComplete();
     }, EXIT_DELAY_MS);
@@ -37,28 +32,16 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
 
   const handleClick = async () => {
     if (isClicked) return;
-
     setIsClicked(true);
 
-    // Si el vídeo existe y no ha dado error, intenta reproducirlo.
-    if (!videoError && videoRef.current) {
+    if (videoRef.current) {
       try {
-        // iOS/Chrome requieren muted+playsInline (ya lo tienes) y play() tras gesto del usuario (click)
         await videoRef.current.play();
-        return; // el cierre lo hará onEnded
       } catch {
-        setVideoError(true);
+        // Si por cualquier motivo el vídeo no puede reproducirse
+        finish();
       }
     }
-
-    // Fallback: si el vídeo no puede reproducirse, simulamos duración
-    fallbackTimerRef.current = window.setTimeout(() => {
-      finish();
-    }, FALLBACK_DURATION_MS);
-  };
-
-  const handleVideoEnd = () => {
-    finish();
   };
 
   return (
@@ -89,9 +72,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
                 playsInline
                 preload="auto"
                 muted
-                poster={envelopePoster}
-                onEnded={handleVideoEnd}
-                onError={() => setVideoError(true)}
+                onEnded={finish}
               >
                 <source src={envelopeVideo} type="video/mp4" />
               </video>
@@ -100,7 +81,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-charcoal/30" />
             </motion.div>
 
-            {/* Click to open text */}
+            {/* Tap to open */}
             <motion.div
               className="absolute bottom-20 left-1/2 -translate-x-1/2 text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -108,6 +89,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
               transition={{ delay: 0.5, duration: 0.6 }}
             >
               <p className="text-label text-ivory/80 mb-2">Tap to Open</p>
+
               <motion.div
                 className="w-8 h-8 mx-auto border border-ivory/40 rounded-full flex items-center justify-center"
                 animate={{ scale: [1, 1.1, 1] }}
@@ -130,7 +112,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
               </motion.div>
             </motion.div>
 
-            {/* Opening animation overlay */}
+            {/* Opening overlay */}
             <AnimatePresence>
               {isClicked && (
                 <motion.div
@@ -151,6 +133,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
                     >
                       <div className="w-3 h-3 bg-gold rounded-full" />
                     </motion.div>
+
                     <p className="heading-script text-2xl text-ivory/80">
                       Opening your invitation...
                     </p>
@@ -166,4 +149,5 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
 };
 
 export default IntroOverlay;
+
 
