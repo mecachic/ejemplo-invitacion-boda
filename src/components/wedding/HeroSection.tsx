@@ -1,28 +1,37 @@
-import { motion } from 'framer-motion';
-import petalsImage from '@/assets/petals-bg.jpg';
-import petalsVideo from '@/assets/petals-hero.mp4';
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+import petalsImage from "@/assets/petals-bg.jpg";
+import petalsVideo from "@/assets/petals-hero.mp4";
 
 const HeroSection = () => {
+  const [videoError, setVideoError] = useState(false);
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Video Background - Using image as placeholder */}
+      {/* Background */}
       <div className="absolute inset-0">
-        <img
-          src={petalsImage}
-          alt=""
-          className="w-full h-full object-cover"
-        />
-        {/* For actual video, uncomment below:
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="w-full h-full object-cover"
-      >
-        <source src={petalsVideo} type="video/mp4" />
-      </video>
-        */}
+        {!videoError ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster={petalsImage}
+            className="w-full h-full object-cover"
+            onError={() => setVideoError(true)}
+          >
+            <source src={petalsVideo} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={petalsImage}
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
 
       {/* Overlay */}
@@ -35,7 +44,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          <p className="text-label text-ivory/70 mb-4">We're Getting Married</p>
+          <p className="text-label text-ivory/70 mb-4">We&apos;re Getting Married</p>
         </motion.div>
 
         <motion.h1
@@ -44,7 +53,7 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="heading-script text-5xl md:text-7xl lg:text-8xl text-ivory mb-6"
         >
-          Isabella & Marco
+          Isabella &amp; Marco
         </motion.h1>
 
         <motion.div
@@ -83,15 +92,17 @@ const HeroSection = () => {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center"
       >
         <p className="text-label text-ivory/60 mb-3">Scroll to Continue</p>
+
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <svg
             className="w-6 h-6 text-ivory/40 mx-auto"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
