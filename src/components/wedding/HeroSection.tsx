@@ -1,37 +1,26 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 
-import petalsImage from "@/assets/petals-bg.jpg";
 import petalsVideo from "@/assets/petals-hero.mp4";
 
 const HeroSection = () => {
-  const [videoError, setVideoError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        {!videoError ? (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster={petalsImage}
-            className="w-full h-full object-cover"
-            onError={() => setVideoError(true)}
-          >
-            <source src={petalsVideo} type="video/mp4" />
-          </video>
-        ) : (
-          <img
-            src={petalsImage}
-            alt=""
-            aria-hidden="true"
-            className="w-full h-full object-cover"
-          />
-        )}
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover"
+        >
+          <source src={petalsVideo} type="video/mp4" />
+        </video>
       </div>
 
       {/* Overlay */}
