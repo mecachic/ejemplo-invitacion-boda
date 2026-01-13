@@ -13,7 +13,11 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      {/*
+        Vite sets import.meta.env.BASE_URL from the `base` option in vite.config.
+        Using it as basename makes routing work both on Lovable (/) and GitHub Pages (/repo-name/).
+      */}
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
