@@ -8,27 +8,25 @@ interface IntroOverlayProps {
 }
 
 const EXIT_DELAY_MS = 800;
-// Flash overlay only in the last 0.5s of the intro video.
+
+// Flash starts in the last 0.5s and ramps up smoothly to fully cover the video at the end.
 const FLASH_LAST_SECONDS = 0.5;
-// Flash visible duration (ms) once triggered.
-const FLASH_DURATION_MS = 250;
+
+const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
 const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
-  const [showFlash, setShowFlash] = useState(false);
-  const [flashArmed, setFlashArmed] = useState(true);
+
+  // Dynamic flash opacity (0 -> 1) during the last FLASH_LAST_SECONDS
+  const [flashOpacity, setFlashOpacity] = useState(0);
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const flashTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     document.body.classList.add("scroll-locked");
     return () => {
       document.body.classList.remove("scroll-locked");
-      if (flashTimeoutRef.current) {
-        window.clearTimeout(flashTimeoutRef.current);
-      }
     };
   }, []);
 
@@ -44,40 +42,39 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
     if (isClicked) return;
     setIsClicked(true);
 
-    if (videoRef.current) {
+    const v = videoRef.current;
+    if (v) {
       try {
-        await videoRef.current.play();
+        await v.play();
       } catch {
-        // Si por cualquier motivo el vídeo no puede reproducirse
+        // If video can't play for any reason, proceed to the invitation
         finish();
       }
     }
   };
 
   const handleEnded = () => {
-    // Do NOT force the flash here; just reveal the invitation cleanly.
+    // Ensure full white cover at the very end, then reveal the invitation.
+    setFlashOpacity(1);
     window.setTimeout(() => finish(), 80);
   };
 
   const handleTimeUpdate = () => {
     const v = videoRef.current;
-    if (!v || !flashArmed) return;
+    if (!v) return;
     if (!Number.isFinite(v.duration) || v.duration <= 0) return;
 
     const remaining = v.duration - v.currentTime;
 
-    if (remaining <= FLASH_LAST_SECONDS) {
-      setFlashArmed(false);
-      setShowFlash(true);
+    // Map remaining time to [0..1] progress within the last FLASH_LAST_SECONDS.
+    // remaining = FLASH_LAST_SECONDS  -> progress = 0
+    // remaining = 0                 -> progress = 1
+    const progress = clamp01((FLASH_LAST_SECONDS - remaining) / FLASH_LAST_SECONDS);
 
-      // Turn off the flash quickly so it doesn't cover the video.
-      if (flashTimeoutRef.current) {
-        window.clearTimeout(flashTimeoutRef.current);
-      }
-      flashTimeoutRef.current = window.setTimeout(() => {
-        setShowFlash(false);
-      }, FLASH_DURATION_MS);
-    }
+    // Smooth ramp (not explosive): ease-in so it gently starts and fully covers at the end.
+    const eased = progress * progress;
+
+    setFlashOpacity(eased);
   };
 
   return (
@@ -99,8 +96,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
           <div className="relative w-full h-full flex items-center justify-center">
             <motion.div
               className="relative w-full h-full"
-              // Mantener el vídeo visible durante la reproducción.
-              // Solo un zoom suave sin apagarlo.
+              // Keep video visible; only a gentle zoom for elegance
               animate={isClicked ? { scale: 1.03, opacity: 1 } : { scale: 1, opacity: 1 }}
               transition={{ duration: 2, ease: "easeInOut" }}
             >
@@ -151,21 +147,14 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
               </motion.div>
             </motion.div>
 
-            {/* Flash overlay (brief, last 0.5s) */}
-            <AnimatePresence>
-              {showFlash && (
-                <motion.div
-                  className="absolute inset-0 pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
-                >
-                  <div className="absolute inset-0 bg-white" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-gold/20 via-white/70 to-gold/20" />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Progressive flash overlay (ramps up to fully cover the last frames) */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ opacity: flashOpacity }}
+            >
+              <div className="absolute inset-0 bg-white" />
+              <div className="absolute inset-0 bg-gradient-to-r from-gold/30 via-white/90 to-gold/30" />
+            </div>
           </div>
         </motion.div>
       )}
@@ -174,3 +163,4 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
 };
 
 export default IntroOverlay;
+
