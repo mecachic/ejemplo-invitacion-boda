@@ -19,6 +19,24 @@
 
   <body>
     <div id="root"></div>
+    <script>
+      // GitHub Pages SPA redirect handler.
+      // Si venimos de 404.html, recuperamos la ruta original en ?redirect=...
+      (function () {
+        const params = new URLSearchParams(window.location.search);
+        const redirect = params.get("redirect");
+        if (!redirect) return;
+
+        // Limpia el parámetro para que no quede en la URL final.
+        params.delete("redirect");
+        const remaining = params.toString();
+        const cleanedSearch = remaining ? `?${remaining}` : "";
+
+        // Sustituye la URL actual por la ruta original solicitada.
+        // Nota: BrowserRouter usa basename (BASE_URL), por lo que aquí usamos rutas relativas a la app.
+        window.history.replaceState(null, "", redirect + cleanedSearch);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -4,9 +4,23 @@
     <meta charset="utf-8" />
     <title>Redirecting…</title>
     <script>
-      const path = window.location.pathname;
-      const base = "/ejemplo-invitacion-boda/";
-      window.location.replace(base + "index.html");
+      // GitHub Pages SPA fallback.
+      // Preserva la ruta solicitada y la pasa a index.html para que React Router la recupere.
+      (function () {
+        const base = "/ejemplo-invitacion-boda/";
+        const pathname = window.location.pathname;
+
+        // Convertir /ejemplo-invitacion-boda/lo-que-sea -> /lo-que-sea
+        let relative = pathname.startsWith(base) ? "/" + pathname.slice(base.length) : pathname;
+        if (relative === "//") relative = "/";
+
+        const target =
+          base +
+          "index.html?redirect=" +
+          encodeURIComponent(relative + window.location.search + window.location.hash);
+
+        window.location.replace(target);
+      })();
     </script>
   </head>
   <body></body>
