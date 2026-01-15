@@ -28,46 +28,60 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+        {/* Label */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
         >
-          <p className="text-label text-ivory/70 mb-4">We&apos;re Getting Married</p>
+          <p className="text-label text-ivory/70 mb-3 tracking-[0.22em] uppercase">
+            We&apos;re Getting Married
+          </p>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="heading-script text-5xl md:text-7xl lg:text-8xl text-ivory mb-6"
-        >
-          Sara &amp; Giovanni
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="divider-ornate text-gold mb-6"
-        >
-          <span className="text-2xl">✦</span>
-        </motion.div>
-
+        {/* Date (primary) */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="heading-display text-xl md:text-2xl text-ivory/90"
+          transition={{ duration: 0.9, delay: 0.35 }}
+          className="heading-display text-3xl md:text-4xl lg:text-5xl text-ivory mb-5 tracking-[0.14em] uppercase"
         >
           June 27, 2026
         </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
+        {/* Names (secondary, but still premium) */}
+        <motion.h1
+          initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="text-body text-ivory/70 mt-2"
+          transition={{ duration: 1, delay: 0.55 }}
+          className="heading-display text-4xl md:text-6xl lg:text-7xl text-ivory leading-[1.05]"
+        >
+          <span className="inline-block">Sara</span>
+          <span
+            className="inline-block mx-4 md:mx-6 text-gold/85 font-normal tracking-[0.06em]"
+            aria-hidden="true"
+          >
+            &amp;
+          </span>
+          <span className="inline-block">Giovanni</span>
+        </motion.h1>
+
+        {/* Subtle ornament */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.75 }}
+          className="text-gold/75 mt-5 mb-5"
+        >
+          <span className="text-lg md:text-xl">✦</span>
+        </motion.div>
+
+        {/* Location */}
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.9 }}
+          className="text-body text-ivory/75 tracking-[0.08em] uppercase"
         >
           Masseria Falco • Cellole (CE)
         </motion.p>
@@ -77,17 +91,19 @@ const HeroSection = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        transition={{ duration: 0.9, delay: 1.2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center"
       >
-        <p className="text-label text-ivory/60 mb-3">Scroll to Continue</p>
+        <p className="text-label text-ivory/55 mb-3 tracking-[0.18em] uppercase">
+          Scroll to Continue
+        </p>
 
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <svg
-            className="w-6 h-6 text-ivory/40 mx-auto"
+            className="w-6 h-6 text-ivory/35 mx-auto"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
