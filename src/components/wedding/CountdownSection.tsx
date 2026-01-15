@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const CountdownSection = () => {
-  const weddingDate = new Date('2025-09-14T15:00:00');
+  const weddingDate = new Date('2026-06-27T17:30:00');
   
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
