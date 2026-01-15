@@ -9,7 +9,7 @@ interface IntroOverlayProps {
 
 const EXIT_DELAY_MS = 800;
 
-// Flash starts in the last 0.5s and ramps up smoothly to fully cover the video at the end.
+// Flash starts in the last 0.5s and ramps up smoothly
 const FLASH_LAST_SECONDS = 0.5;
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
@@ -18,8 +18,9 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
-  // Dynamic flash opacity (0 -> 1) during the last FLASH_LAST_SECONDS
+  // Controls flash strength and expansion during the last FLASH_LAST_SECONDS
   const [flashOpacity, setFlashOpacity] = useState(0);
+  const [flashScale, setFlashScale] = useState(0.2);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -47,15 +48,15 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
       try {
         await v.play();
       } catch {
-        // If video can't play for any reason, proceed to the invitation
         finish();
       }
     }
   };
 
   const handleEnded = () => {
-    // Ensure full white cover at the very end, then reveal the invitation.
+    // ensure it fully covers at the very end
     setFlashOpacity(1);
+    setFlashScale(2.2);
     window.setTimeout(() => finish(), 80);
   };
 
@@ -66,15 +67,17 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
 
     const remaining = v.duration - v.currentTime;
 
-    // Map remaining time to [0..1] progress within the last FLASH_LAST_SECONDS.
-    // remaining = FLASH_LAST_SECONDS  -> progress = 0
-    // remaining = 0                 -> progress = 1
     const progress = clamp01((FLASH_LAST_SECONDS - remaining) / FLASH_LAST_SECONDS);
 
-    // Smooth ramp (not explosive): ease-in so it gently starts and fully covers at the end.
+    // Smooth ramp: gentle start, full cover at end (not explosive)
     const eased = progress * progress;
 
+    // Scale from small center glow to large full-screen expansion
+    // 0.2 -> 2.2 makes it cover the entire viewport by the end
+    const scale = 0.2 + eased * 2.0;
+
     setFlashOpacity(eased);
+    setFlashScale(scale);
   };
 
   return (
@@ -96,7 +99,6 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
           <div className="relative w-full h-full flex items-center justify-center">
             <motion.div
               className="relative w-full h-full"
-              // Keep video visible; only a gentle zoom for elegance
               animate={isClicked ? { scale: 1.03, opacity: 1 } : { scale: 1, opacity: 1 }}
               transition={{ duration: 2, ease: "easeInOut" }}
             >
@@ -147,13 +149,38 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
               </motion.div>
             </motion.div>
 
-            {/* Progressive flash overlay (ramps up to fully cover the last frames) */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ opacity: flashOpacity }}
-            >
-              <div className="absolute inset-0 bg-white" />
-              <div className="absolute inset-0 bg-gradient-to-r from-gold/30 via-white/90 to-gold/30" />
+            {/* Radial progressive flash (center -> expands) */}
+            <div className="absolute inset-0 pointer-events-none">
+              <motion.div
+                className="absolute left-1/2 top-1/2"
+                style={{
+                  // anchor in center
+                  x: "-50%",
+                  y: "-50%",
+                  width: "120vmax",
+                  height: "120vmax",
+                  borderRadius: "9999px",
+                  background:
+                    "radial-gradient(circle at center, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.55) 22%, rgba(255,255,255,0.18) 45%, rgba(255,255,255,0.0) 70%)",
+                  filter: "blur(2px)",
+                }}
+                animate={{
+                  opacity: flashOpacity,
+                  scale: flashScale,
+                }}
+                transition={{ duration: 0.06, ease: "linear" }}
+              />
+              {/* optional warm tint layer (subtle) */}
+              <motion.div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(circle at center, rgba(208,168,88,0.25) 0%, rgba(208,168,88,0.10) 35%, rgba(208,168,88,0.0) 70%)",
+                  mixBlendMode: "screen",
+                }}
+                animate={{ opacity: flashOpacity * 0.6 }}
+                transition={{ duration: 0.06, ease: "linear" }}
+              />
             </div>
           </div>
         </motion.div>
@@ -163,4 +190,5 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
 };
 
 export default IntroOverlay;
+
 
