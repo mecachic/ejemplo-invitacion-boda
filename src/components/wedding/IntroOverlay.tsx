@@ -8,8 +8,10 @@ interface IntroOverlayProps {
 }
 
 const EXIT_DELAY_MS = 800;
-// Add a soft flash overlay during the last seconds of the intro video.
-const FLASH_LAST_SECONDS = 2;
+// Flash overlay only in the last 0.5s of the intro video.
+const FLASH_LAST_SECONDS = 0.5;
+// Flash visible duration (ms) once triggered.
+const FLASH_DURATION_MS = 250;
 
 const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -18,11 +20,15 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
   const [flashArmed, setFlashArmed] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const flashTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     document.body.classList.add("scroll-locked");
     return () => {
       document.body.classList.remove("scroll-locked");
+      if (flashTimeoutRef.current) {
+        window.clearTimeout(flashTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -49,9 +55,8 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
   };
 
   const handleEnded = () => {
-    // Ensure flash is on at the end, then reveal the invitation.
-    setShowFlash(true);
-    window.setTimeout(() => finish(), 250);
+    // Do NOT force the flash here; just reveal the invitation cleanly.
+    window.setTimeout(() => finish(), 80);
   };
 
   const handleTimeUpdate = () => {
@@ -60,9 +65,18 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
     if (!Number.isFinite(v.duration) || v.duration <= 0) return;
 
     const remaining = v.duration - v.currentTime;
+
     if (remaining <= FLASH_LAST_SECONDS) {
       setFlashArmed(false);
       setShowFlash(true);
+
+      // Turn off the flash quickly so it doesn't cover the video.
+      if (flashTimeoutRef.current) {
+        window.clearTimeout(flashTimeoutRef.current);
+      }
+      flashTimeoutRef.current = window.setTimeout(() => {
+        setShowFlash(false);
+      }, FLASH_DURATION_MS);
     }
   };
 
@@ -86,7 +100,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
             <motion.div
               className="relative w-full h-full"
               // Mantener el vídeo visible durante la reproducción.
-              // Si queremos darle elegancia, solo hacemos un zoom suave sin apagarlo.
+              // Solo un zoom suave sin apagarlo.
               animate={isClicked ? { scale: 1.03, opacity: 1 } : { scale: 1, opacity: 1 }}
               transition={{ duration: 2, ease: "easeInOut" }}
             >
@@ -137,7 +151,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
               </motion.div>
             </motion.div>
 
-            {/* Flash overlay (last 2 seconds + end) */}
+            {/* Flash overlay (brief, last 0.5s) */}
             <AnimatePresence>
               {showFlash && (
                 <motion.div
@@ -145,7 +159,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.22, ease: "easeOut" }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
                 >
                   <div className="absolute inset-0 bg-white" />
                   <div className="absolute inset-0 bg-gradient-to-r from-gold/20 via-white/70 to-gold/20" />
@@ -160,5 +174,3 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
 };
 
 export default IntroOverlay;
-
-
