@@ -7,14 +7,15 @@ interface RSVPFormData {
   name: string;
   email: string;
   attending: 'yes' | 'no' | '';
-  guests: string;
-  dietary: string;
-  message: string;
+  guests: string; // total personas (incluyéndote)
+  companions: string; // nombres de acompañantes, si aplica
+  dietary: string; // alergias / restricciones
+  message: string; // notas opcionales
 }
 
 const RSVPSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -27,23 +28,25 @@ const RSVPSection = () => {
       email: '',
       attending: '',
       guests: '1',
+      companions: '',
       dietary: '',
       message: '',
     },
   });
 
   const attending = watch('attending');
+  const guests = watch('guests');
 
   const onSubmit = async (data: RSVPFormData) => {
     setIsSubmitting(true);
-    
+
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    toast.success('Thank you for your RSVP!', {
-      description: 'We have received your response and will be in touch soon.',
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+
+    toast.success('¡Gracias por confirmar!', {
+      description: 'Hemos recibido vuestra respuesta. Si hace falta, os contactaremos para coordinar los detalles.',
     });
-    
+
     reset();
     setIsSubmitting(false);
   };
@@ -58,12 +61,12 @@ const RSVPSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-label text-accent mb-4">We Hope You Can Join Us</p>
+          <p className="text-label text-accent mb-4">CONFIRMACIÓN</p>
           <h2 className="heading-script text-4xl md:text-5xl text-foreground mb-4">
             RSVP
           </h2>
           <p className="text-body text-muted-foreground">
-            Please respond by August 1st, 2025
+            Por favor, responded antes del <span className="font-medium text-foreground">1 de abril de 2026</span>.
           </p>
         </motion.div>
 
@@ -76,134 +79,170 @@ const RSVPSection = () => {
           className="card-elegant p-8 md:p-12"
         >
           <div className="space-y-8">
-            {/* Name */}
-            <div>
-              <label className="text-label text-muted-foreground block mb-2">
-                Full Name *
-              </label>
-              <input
-                {...register('name', { required: 'Name is required' })}
-                className="input-elegant"
-                placeholder="Enter your full name"
-              />
-              {errors.name && (
-                <p className="text-destructive text-sm mt-2">{errors.name.message}</p>
-              )}
-            </div>
+            {/* Name + Email */}
+            <div className="grid gap-8 md:grid-cols-2">
+              <div>
+                <label className="text-label text-muted-foreground block mb-2">
+                  Nombre y apellidos *
+                </label>
+                <input
+                  {...register('name', { required: 'Indica tu nombre' })}
+                  className="input-elegant"
+                  placeholder="Escribe tu nombre"
+                />
+                {errors.name && (
+                  <p className="text-destructive text-sm mt-2">{errors.name.message}</p>
+                )}
+              </div>
 
-            {/* Email */}
-            <div>
-              <label className="text-label text-muted-foreground block mb-2">
-                Email Address *
-              </label>
-              <input
-                {...register('email', {
-                  required: 'Email is required',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Invalid email address',
-                  },
-                })}
-                type="email"
-                className="input-elegant"
-                placeholder="Enter your email"
-              />
-              {errors.email && (
-                <p className="text-destructive text-sm mt-2">{errors.email.message}</p>
-              )}
+              <div>
+                <label className="text-label text-muted-foreground block mb-2">
+                  Email *
+                </label>
+                <input
+                  {...register('email', {
+                    required: 'Indica tu email',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'Email no válido',
+                    },
+                  })}
+                  type="email"
+                  className="input-elegant"
+                  placeholder="nombre@correo.com"
+                />
+                {errors.email && (
+                  <p className="text-destructive text-sm mt-2">{errors.email.message}</p>
+                )}
+              </div>
             </div>
 
             {/* Attending */}
             <div>
               <label className="text-label text-muted-foreground block mb-4">
-                Will You Be Attending? *
+                ¿Asistirás? *
               </label>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    {...register('attending', { required: 'Please select an option' })}
-                    type="radio"
-                    value="yes"
-                    className="w-4 h-4 text-primary focus:ring-primary"
-                  />
-                  <span className="text-body">Joyfully Accept</span>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                <label className="flex items-center justify-between gap-3 cursor-pointer rounded-xl border border-border px-4 py-3 bg-white/60">
+                  <div className="flex items-center gap-3">
+                    <input
+                      {...register('attending', { required: 'Selecciona una opción' })}
+                      type="radio"
+                      value="yes"
+                      className="w-4 h-4 text-primary focus:ring-primary"
+                    />
+                    <span className="text-body">Sí, asistiré</span>
+                  </div>
+                  <span className="text-muted-foreground text-sm">Confirmo</span>
                 </label>
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    {...register('attending', { required: 'Please select an option' })}
-                    type="radio"
-                    value="no"
-                    className="w-4 h-4 text-primary focus:ring-primary"
-                  />
-                  <span className="text-body">Regretfully Decline</span>
+
+                <label className="flex items-center justify-between gap-3 cursor-pointer rounded-xl border border-border px-4 py-3 bg-white/60">
+                  <div className="flex items-center gap-3">
+                    <input
+                      {...register('attending', { required: 'Selecciona una opción' })}
+                      type="radio"
+                      value="no"
+                      className="w-4 h-4 text-primary focus:ring-primary"
+                    />
+                    <span className="text-body">No podré asistir</span>
+                  </div>
+                  <span className="text-muted-foreground text-sm">Lo siento</span>
                 </label>
               </div>
+
               {errors.attending && (
                 <p className="text-destructive text-sm mt-2">{errors.attending.message}</p>
               )}
             </div>
 
-            {/* Conditional fields for attending guests */}
+            {/* Conditional fields when attending */}
             {attending === 'yes' && (
               <>
-                {/* Number of Guests */}
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <label className="text-label text-muted-foreground block mb-2">
-                    Number of Guests
-                  </label>
-                  <select
-                    {...register('guests')}
-                    className="input-elegant bg-transparent cursor-pointer"
+                <div className="grid gap-8 md:grid-cols-2">
+                  {/* Number of Guests */}
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                  </select>
-                </motion.div>
+                    <label className="text-label text-muted-foreground block mb-2">
+                      ¿Cuántas personas vendréis? *
+                    </label>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Incluye tu asistencia en el total.
+                    </p>
+                    <select
+                      {...register('guests')}
+                      className="input-elegant bg-transparent cursor-pointer"
+                    >
+                      <option value="1">1 persona</option>
+                      <option value="2">2 personas</option>
+                      <option value="3">3 personas</option>
+                      <option value="4">4 personas</option>
+                      <option value="5">5 personas</option>
+                      <option value="6">6 personas</option>
+                    </select>
+                  </motion.div>
 
-                {/* Dietary Restrictions */}
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  transition={{ duration: 0.3, delay: 0.1 }}
-                >
-                  <label className="text-label text-muted-foreground block mb-2">
-                    Dietary Restrictions
-                  </label>
-                  <input
-                    {...register('dietary')}
-                    className="input-elegant"
-                    placeholder="Vegetarian, vegan, allergies, etc."
-                  />
-                </motion.div>
+                  {/* Dietary */}
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    transition={{ duration: 0.3, delay: 0.05 }}
+                  >
+                    <label className="text-label text-muted-foreground block mb-2">
+                      Alergias o restricciones (opcional)
+                    </label>
+                    <input
+                      {...register('dietary')}
+                      className="input-elegant"
+                      placeholder="Vegetariano, vegan, intolerancias, etc."
+                    />
+                  </motion.div>
+                </div>
+
+                {/* Companion names only if guests > 1 */}
+                {Number(guests) > 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <label className="text-label text-muted-foreground block mb-2">
+                      Nombres de los acompañantes (opcional)
+                    </label>
+                    <textarea
+                      {...register('companions')}
+                      rows={3}
+                      className="input-elegant resize-none"
+                      placeholder="Ej.: Marta López, Carlos Pérez..."
+                    />
+                  </motion.div>
+                )}
               </>
             )}
 
             {/* Message */}
             <div>
               <label className="text-label text-muted-foreground block mb-2">
-                Message for the Couple (Optional)
+                Nota para los novios (opcional)
               </label>
               <textarea
                 {...register('message')}
                 rows={4}
                 className="input-elegant resize-none"
-                placeholder="Share your wishes or ask any questions..."
+                placeholder="Dejadnos aquí cualquier comentario..."
               />
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting}
               className="button-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Sending...' : 'Send RSVP'}
+              {isSubmitting ? 'Enviando...' : 'Enviar confirmación'}
             </button>
           </div>
         </motion.form>
