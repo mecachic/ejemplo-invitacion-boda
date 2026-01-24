@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Palette, Sparkles, Sun, Info } from 'lucide-react';
+import { Palette, Sparkles, Sun, Info, Car, Fish, UtensilsCrossed } from 'lucide-react';
 
 const FAQSection = () => {
   return (
@@ -80,8 +80,40 @@ const FAQSection = () => {
             </h3>
 
             <div className="space-y-5 text-body text-muted-foreground">
+                            <div className="rounded-xl bg-white/60 border border-border p-5">
+                <p className="font-medium text-foreground mb-2 inline-flex items-center gap-2">
+                  <Car className="w-4 h-4 text-accent" /> Llegada y aparcamiento
+                </p>
+                <p className="text-sm">
+                  La masseria se encuentra en plena naturaleza y dispone de una amplia zona de aparcamiento privado dentro del recinto,
+                  para que podáis llegar con total comodidad y sin preocupaciones.
+                </p>
+              </div>
+
               <div className="rounded-xl bg-white/60 border border-border p-5">
-                <p className="font-medium text-foreground mb-1">Alergias o restricciones</p>
+                <p className="font-medium text-foreground mb-2 inline-flex items-center gap-2">
+                  <Fish className="w-4 h-4 text-accent" /> Menú
+                </p>
+                <p className="text-sm">
+                  El menú estará centrado principalmente en pescado y propuestas mediterráneas, con opciones variadas pensadas
+                  para que todos puedan disfrutar cómodamente de la cena.
+                </p>
+              </div>
+
+              <div className="rounded-xl bg-white/60 border border-border p-5">
+                <p className="font-medium text-foreground mb-2 inline-flex items-center gap-2">
+                  <Fish className="w-4 h-4 text-accent" /> Menú
+                </p>
+                <p className="text-sm">
+                  El menú será mayoritariamente de pescado, con opciones variadas. Si tienes una dieta
+                  específica o restricciones, indícanoslo al confirmar asistencia y lo adaptaremos.
+                </p>
+              </div>
+
+              <div className="rounded-xl bg-white/60 border border-border p-5">
+                <p className="font-medium text-foreground mb-2 inline-flex items-center gap-2">
+                  <UtensilsCrossed className="w-4 h-4 text-accent" /> Alergias o restricciones
+                </p>
                 <p className="text-sm">
                   Indícanos cualquier alergia o restricción alimentaria al confirmar asistencia.
                 </p>
