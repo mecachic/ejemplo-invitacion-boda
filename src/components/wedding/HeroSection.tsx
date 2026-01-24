@@ -46,14 +46,14 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.55 }}
           className="heading-display text-4xl md:text-6xl lg:text-7xl text-ivory leading-[1.05] font-medium"
         >
-          <span className="inline-block">Sara</span>
+          <span className="inline-block">Giovanni</span>
           <span
             className="inline-block mx-4 md:mx-6 text-gold/85 font-medium tracking-[0.08em]"
             aria-hidden="true"
           >
             &amp;
           </span>
-          <span className="inline-block">Giovanni</span>
+          <span className="inline-block">Sara</span>
         </motion.h1>
 
         {/* Date (secondary) */}
@@ -61,7 +61,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35 }}
-          className="heading-display text-2xl md:text-3xl lg:text-4xl text-ivory/90 mt-5 tracking-[0.14em] uppercase font-medium"
+          className="font-scriptDate italic text-3xl md:text-4xl lg:text-5xl text-ivory/95 mt-4 tracking-normal"
         >
           27 June 2026
         </motion.p>
