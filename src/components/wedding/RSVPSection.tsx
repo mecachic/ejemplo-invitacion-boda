@@ -13,6 +13,8 @@ interface RSVPFormData {
   message: string; // notas opcionales
 }
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjpwooq";
+
 const RSVPSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -40,15 +42,42 @@ const RSVPSection = () => {
   const onSubmit = async (data: RSVPFormData) => {
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    try {
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("attending", data.attending);
+      formData.append("guests", data.guests);
+      formData.append("companions", data.companions);
+      formData.append("dietary", data.dietary);
+      formData.append("message", data.message);
 
-    toast.success('¡Gracias por confirmar!', {
-      description: 'Hemos recibido vuestra respuesta. Si hace falta, os contactaremos para coordinar los detalles.',
-    });
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
 
-    reset();
-    setIsSubmitting(false);
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Formspree error ${res.status}: ${text}`);
+      }
+
+      toast.success("¡Gracias por confirmar!", {
+        description:
+          "Hemos recibido vuestra respuesta. Si hace falta, os contactaremos para coordinar los detalles.",
+      });
+
+      reset();
+    } catch (e) {
+      console.error(e);
+      toast.error("No se pudo enviar el RSVP", {
+        description:
+          "Revisa tu conexión e inténtalo de nuevo. Si persiste, avísanos por WhatsApp.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

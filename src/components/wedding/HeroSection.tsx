@@ -23,8 +23,8 @@ const HeroSection = () => {
         </video>
       </div>
 
-      {/* Overlay (editorial gradient for readability) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/75 via-charcoal/35 to-charcoal/20" />
+      {/* Overlay (gradient for readability, keeps the lower part lighter) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/35 to-charcoal/10" />
 
       {/* Content (starts from the top; floats over the video) */}
       <div className="relative z-10 h-full flex flex-col items-center justify-start text-center px-6 pt-[10vh] md:pt-[12vh]">
@@ -44,7 +44,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.55 }}
-          className="font-scriptDate text-[44px] md:text-[60px] lg:text-[72px] text-ivory leading-[1.05] font-medium"
+          className="heading-display text-4xl md:text-6xl lg:text-7xl text-ivory leading-[1.05] font-medium"
         >
           <span className="inline-block">Giovanni</span>
           <span
@@ -56,39 +56,24 @@ const HeroSection = () => {
           <span className="inline-block">Sara</span>
         </motion.h1>
 
-        {/* Date block (editorial proportions) */}
-        <motion.div
+        {/* Date (secondary) */}
+        <motion.p
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35 }}
-          className="mt-10 flex flex-col items-center"
+          className="font-scriptDate italic text-3xl md:text-4xl lg:text-5xl text-ivory/95 mt-4 tracking-normal"
         >
-          {/* Month */}
-          <div className="font-display text-ivory/95 text-[18px] md:text-[22px] tracking-[0.28em] uppercase">
-            June
-          </div>
+          27 June 2026
+        </motion.p>
 
-          {/* Diamond (top) */}
-          <div
-            className="w-2.5 h-2.5 rotate-45 bg-white opacity-85 mt-5 mb-4"
-            aria-hidden="true"
-          />
-
-          {/* Day (optical centering correction) */}
-          <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px] -mt-1 -mb-1">
-            27
-          </div>
-
-          {/* Diamond (bottom) */}
-          <div
-            className="w-2.5 h-2.5 rotate-45 bg-white opacity-85 mt-4 mb-5"
-            aria-hidden="true"
-          />
-
-          {/* Year */}
-          <div className="font-display text-ivory/95 text-[22px] md:text-[28px] tracking-[0.22em]">
-            2026
-          </div>
+        {/* Subtle ornament */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.75 }}
+          className="text-gold/75 mt-4 mb-5"
+        >
+          <span className="text-lg md:text-xl">✦</span>
         </motion.div>
 
         {/* Location */}
@@ -96,7 +81,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.9 }}
-          className="text-body text-ivory/70 tracking-[0.22em] uppercase mt-10"
+          className="text-body text-ivory/75 tracking-[0.08em] uppercase"
         >
           Masseria Falco • Cellole (CE)
         </motion.p>
@@ -138,5 +123,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
 
