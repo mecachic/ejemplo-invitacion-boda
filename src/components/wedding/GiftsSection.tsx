@@ -1,27 +1,59 @@
-import { motion } from 'framer-motion';
-import { Gift, CreditCard, Home } from 'lucide-react';
+import React, { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { Plane, CreditCard, Copy, Check } from "lucide-react";
+
+/**
+ * TODO: Sustituye este IBAN por el vuestro real antes de publicar.
+ * Recomendación: si prefieres no dejarlo en abierto, puedes cargarlo desde una env var.
+ */
+const DEFAULT_IBAN = "ES00 XXXX XXXX XXXX XXXX XXXX";
+
+function copyToClipboard(text: string) {
+  // Clipboard API (preferente)
+  if (navigator?.clipboard?.writeText) {
+    return navigator.clipboard.writeText(text);
+  }
+
+  // Fallback
+  return new Promise<void>((resolve, reject) => {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "true");
+      ta.style.position = "absolute";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error("Copy failed"));
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
 
 const GiftsSection = () => {
-  const giftOptions = [
-    {
-      icon: Home,
-      title: 'Honeymoon Fund',
-      description:
-        'Help us create unforgettable memories as we embark on our first adventure as a married couple.',
-    },
-    {
-      icon: Gift,
-      title: 'Gift Registry',
-      description:
-        'We have curated a selection of items at our favorite stores to help build our home together.',
-    },
-    {
-      icon: CreditCard,
-      title: 'Cash Gift',
-      description:
-        'Your presence is the greatest gift, but if you wish to contribute, we would be truly grateful.',
-    },
-  ];
+  const IBAN = useMemo(() => {
+    // Si defines VITE_GIFT_IBAN en .env, se usará automáticamente.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const envIban = (import.meta as any)?.env?.VITE_GIFT_IBAN as string | undefined;
+    return (envIban && envIban.trim()) || DEFAULT_IBAN;
+  }, []);
+
+  const [showIban, setShowIban] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const onCopy = async () => {
+    try {
+      await copyToClipboard(IBAN);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // si falla, no rompemos la UX
+      setCopied(false);
+    }
+  };
 
   return (
     <section className="section-padding bg-background">
@@ -33,51 +65,106 @@ const GiftsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-label text-accent mb-4">Your Generosity</p>
+          <p className="text-label text-accent mb-4">VUESTRA GENEROSIDAD</p>
           <h2 className="heading-script text-4xl md:text-5xl text-foreground mb-4">
-            Gift Registry
+            Regalos
           </h2>
           <p className="text-body text-muted-foreground max-w-2xl mx-auto">
-            Your presence at our wedding is the greatest gift of all. However, if you
-            wish to honor us with a gift, we have a few options below.
+            Vuestra presencia es el mejor regalo. Si aun así os apetece tener un detalle con
+            nosotros, dejamos aquí dos opciones, siempre de forma totalmente opcional.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {giftOptions.map((option, index) => (
-            <motion.div
-              key={option.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="text-center p-8"
+        <div className="grid md:grid-cols-2 gap-10">
+          {/* Viaje futuro */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="text-center p-8"
+          >
+            <div className="w-16 h-16 rounded-full bg-sage-light/30 flex items-center justify-center mx-auto mb-6">
+              <Plane className="w-7 h-7 text-primary" />
+            </div>
+
+            <h3 className="heading-display text-xl text-foreground mb-3">Viaje futuro</h3>
+
+            <p className="text-body text-muted-foreground text-sm">
+              No haremos luna de miel justo después de la boda. Más adelante nos gustaría realizar un
+              viaje especial, y Japón es uno de nuestros grandes sueños. Si queréis contribuir a
+              hacerlo realidad, os lo agradeceremos muchísimo.
+            </p>
+          </motion.div>
+
+          {/* Aportación / IBAN */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-center p-8"
+          >
+            <div className="w-16 h-16 rounded-full bg-sage-light/30 flex items-center justify-center mx-auto mb-6">
+              <CreditCard className="w-7 h-7 text-primary" />
+            </div>
+
+            <h3 className="heading-display text-xl text-foreground mb-3">Aportación</h3>
+
+            <p className="text-body text-muted-foreground text-sm mb-6">
+              Para quienes prefieran hacer una aportación, os dejamos los datos de forma discreta.
+              No es en absoluto necesario, pero será recibido con enorme cariño.
+            </p>
+
+            <button
+              type="button"
+              className="button-outline"
+              onClick={() => setShowIban((v) => !v)}
+              aria-expanded={showIban}
             >
-              <div className="w-16 h-16 rounded-full bg-sage-light/30 flex items-center justify-center mx-auto mb-6">
-                <option.icon className="w-7 h-7 text-primary" />
+              {showIban ? "Ocultar IBAN" : "Ver IBAN"}
+            </button>
+
+            {showIban && (
+              <div className="mt-6 rounded-2xl bg-white/60 border border-border p-5 text-left">
+                <p className="text-xs text-muted-foreground mb-2">IBAN</p>
+
+                <div className="flex items-center gap-3">
+                  <code className="flex-1 text-sm md:text-base text-foreground break-all">
+                    {IBAN}
+                  </code>
+
+                  <button
+                    type="button"
+                    onClick={onCopy}
+                    className="button-outline px-4 py-2"
+                    aria-label="Copiar IBAN"
+                  >
+                    {copied ? (
+                      <span className="inline-flex items-center gap-2">
+                        <Check className="w-4 h-4" /> Copiado
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-2">
+                        <Copy className="w-4 h-4" /> Copiar
+                      </span>
+                    )}
+                  </button>
+                </div>
+
+                <p className="text-xs text-muted-foreground mt-3">
+                  Si lo prefieres, también puedes pedirnos los datos por mensaje.
+                </p>
               </div>
-
-              <h3 className="heading-display text-xl text-foreground mb-3">
-                {option.title}
-              </h3>
-
-              <p className="text-body text-muted-foreground text-sm mb-6">
-                {option.description}
-              </p>
-
-              <button className="button-outline">
-                Learn More
-              </button>
-            </motion.div>
-          ))}
+            )}
+          </motion.div>
         </div>
 
-        {/* Decorative Element */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
           className="divider-ornate mt-16"
         >
           <span className="text-xl text-accent">✦</span>

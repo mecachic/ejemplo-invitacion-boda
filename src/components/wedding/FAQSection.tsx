@@ -74,7 +74,7 @@ const FAQSection = () => {
       icon: ClownIcon,
       title: "Niños",
       body:
-        "Nos encantan, pero queremos que esta celebración sea para adultos. Gracias por entenderlo.",
+        "Son más que bienvenidos. Contaremos con animadores para que los más pequeños se diviertan mientras vosotros disfrutáis con total tranquilidad.",
     },
     {
       icon: CheckCircle2,
