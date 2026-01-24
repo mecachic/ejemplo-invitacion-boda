@@ -3,7 +3,7 @@ import { Palette, Sparkles, Sun, Info, Car, Fish, UtensilsCrossed } from 'lucide
 
 const FAQSection = () => {
   return (
-    <section className="section-padding bg-secondary">
+    <section className="section-padding bg-background">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -12,7 +12,7 @@ const FAQSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <p className="text-label text-accent mb-4">INFORMACIÓN ÚTIL</p>
+          <p className="text-label text-accent mb-4">NOTAS</p>
           <h2 className="heading-script text-4xl md:text-5xl text-foreground">
             Dress Code
           </h2>
@@ -38,8 +38,7 @@ const FAQSection = () => {
 
             <p className="text-body text-muted-foreground text-center max-w-xl mx-auto">
               Nos encanta que cada invitado exprese su estilo. No hay un código estricto:
-              lo importante es que vengáis cómodos, guapos y vosotros mismos. Los looks
-              coloridos son más que bienvenidos — incluso kaftanes marroquíes.
+              lo importante es que vengáis cómodos, guapos y vosotros mismos.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-2">
@@ -56,8 +55,7 @@ const FAQSection = () => {
 
             <div className="mt-8 mx-auto max-w-xl rounded-xl bg-white/60 border border-border p-5">
               <p className="text-sm text-muted-foreground">
-                Sugerencia práctica: la celebración será en una masseria y parte del evento es al aire libre.
-                Recomendamos calzado cómodo (especialmente si llevas tacón).
+                Sugerencia práctica: la celebración combinará espacios interiores y exteriores en la masseria. En junio el clima suele ser agradable y la propia masseria nos confirma que la temperatura es muy confortable, por lo que podéis vestiros como más os apetezca.
               </p>
             </div>
           </motion.div>
@@ -81,48 +79,9 @@ const FAQSection = () => {
 
             <div className="space-y-5 text-body text-muted-foreground">
                             <div className="rounded-xl bg-white/60 border border-border p-5">
-                <p className="font-medium text-foreground mb-2 inline-flex items-center gap-2">
-                  <Car className="w-4 h-4 text-accent" /> Llegada y aparcamiento
-                </p>
-                <p className="text-sm">
-                  La masseria se encuentra en plena naturaleza y dispone de una amplia zona de aparcamiento privado dentro del recinto,
-                  para que podáis llegar con total comodidad y sin preocupaciones.
-                </p>
-              </div>
-
-              <div className="rounded-xl bg-white/60 border border-border p-5">
-                <p className="font-medium text-foreground mb-2 inline-flex items-center gap-2">
-                  <Fish className="w-4 h-4 text-accent" /> Menú
-                </p>
-                <p className="text-sm">
-                  El menú estará centrado principalmente en pescado y propuestas mediterráneas, con opciones variadas pensadas
-                  para que todos puedan disfrutar cómodamente de la cena.
-                </p>
-              </div>
-
-              <div className="rounded-xl bg-white/60 border border-border p-5">
-                <p className="font-medium text-foreground mb-2 inline-flex items-center gap-2">
-                  <Fish className="w-4 h-4 text-accent" /> Menú
-                </p>
-                <p className="text-sm">
-                  El menú será mayoritariamente de pescado, con opciones variadas. Si tienes una dieta
-                  específica o restricciones, indícanoslo al confirmar asistencia y lo adaptaremos.
-                </p>
-              </div>
-
-              <div className="rounded-xl bg-white/60 border border-border p-5">
-                <p className="font-medium text-foreground mb-2 inline-flex items-center gap-2">
-                  <UtensilsCrossed className="w-4 h-4 text-accent" /> Alergias o restricciones
-                </p>
-                <p className="text-sm">
-                  Indícanos cualquier alergia o restricción alimentaria al confirmar asistencia.
-                </p>
-              </div>
-
-              <div className="rounded-xl bg-white/60 border border-border p-5">
                 <p className="font-medium text-foreground mb-1">Niños</p>
                 <p className="text-sm">
-                  Nos encantan, pero queremos que esta celebración sea para adultos.
+                  ¡Son más que bienvenidos! Contaremos con animadores y payasos para que los más pequeños se diviertan mientras vosotros disfrutáis tranquilos.
                 </p>
               </div>
 
