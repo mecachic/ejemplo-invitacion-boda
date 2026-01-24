@@ -18,7 +18,7 @@ const Footer = () => {
 
           {/* Names */}
           <h3 className="heading-script text-3xl md:text-4xl text-ivory mb-4">
-            Sara & Giovanni
+            Giovanni & Sara
           </h3>
 
           {/* Date */}

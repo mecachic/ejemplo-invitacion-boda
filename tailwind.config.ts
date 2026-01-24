@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
+      scriptDate: ['\"Playfair Display\"', 'serif'],
         display: ['Cormorant Garamond', 'serif'],
         body: ['Montserrat', 'sans-serif'],
-        scriptDate: ['"Playfair Display"', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
