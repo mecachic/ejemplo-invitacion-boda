@@ -13,8 +13,6 @@ interface RSVPFormData {
   message: string; // notas opcionales
 }
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjpwooq";
-
 const RSVPSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -39,23 +37,25 @@ const RSVPSection = () => {
   const attending = watch('attending');
   const guests = watch('guests');
 
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnjpwooq';
+
   const onSubmit = async (data: RSVPFormData) => {
     setIsSubmitting(true);
 
     try {
       const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("email", data.email);
-      formData.append("attending", data.attending);
-      formData.append("guests", data.guests);
-      formData.append("companions", data.companions);
-      formData.append("dietary", data.dietary);
-      formData.append("message", data.message);
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('attending', data.attending);
+      formData.append('guests', data.guests);
+      formData.append('companions', data.companions);
+      formData.append('dietary', data.dietary);
+      formData.append('message', data.message);
 
       const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: "POST",
+        method: 'POST',
         body: formData,
-        headers: { Accept: "application/json" },
+        headers: { Accept: 'application/json' },
       });
 
       if (!res.ok) {
@@ -63,17 +63,17 @@ const RSVPSection = () => {
         throw new Error(`Formspree error ${res.status}: ${text}`);
       }
 
-      toast.success("¡Gracias por confirmar!", {
+      toast.success('¡Gracias por confirmar!', {
         description:
-          "Hemos recibido vuestra respuesta. Si hace falta, os contactaremos para coordinar los detalles.",
+          'Hemos recibido vuestra respuesta. Si hace falta, os contactaremos para coordinar los detalles.',
       });
 
       reset();
     } catch (e) {
       console.error(e);
-      toast.error("No se pudo enviar el RSVP", {
+      toast.error('No se pudo enviar el RSVP', {
         description:
-          "Revisa tu conexión e inténtalo de nuevo. Si persiste, avísanos por WhatsApp.",
+          'Revisa tu conexión e inténtalo de nuevo. Si persiste, avísanos por WhatsApp.',
       });
     } finally {
       setIsSubmitting(false);
