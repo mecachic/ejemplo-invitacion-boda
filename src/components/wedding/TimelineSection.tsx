@@ -3,29 +3,39 @@ import { motion } from 'framer-motion';
 const TimelineSection = () => {
   const events = [
     {
-      time: '3:00 PM',
-      title: 'Ceremony',
-      description: 'Exchange of vows in the villa gardens',
+      time: '17:00',
+      title: 'Cocktail de bienvenida',
+      description: 'Aperitivo de bienvenida en el jardín',
     },
     {
-      time: '4:00 PM',
-      title: 'Cocktail Hour',
-      description: 'Aperitivo with live music on the terrace',
+      time: '18:00',
+      title: 'Ceremonia',
+      description: 'Intercambio de votos',
     },
     {
-      time: '5:30 PM',
-      title: 'Reception',
-      description: 'Dinner and toasts in the grand hall',
+      time: '19:00',
+      title: 'Apertura buffet',
+      description: 'Selección de aperitivos',
     },
     {
-      time: '8:00 PM',
-      title: 'First Dance',
-      description: 'Followed by dancing under the stars',
+      time: '20:00',
+      title: 'Llegada de los novios',
+      description: 'Brindis y saludos',
     },
     {
-      time: '11:00 PM',
-      title: 'Late Night Bites',
-      description: 'Italian street food and gelato',
+      time: '20:30',
+      title: 'Cena',
+      description: 'Inicio de la cena',
+    },
+    {
+      time: '22:30',
+      title: 'Tarta nupcial',
+      description: 'Momento tarta',
+    },
+    {
+      time: '23:00',
+      title: 'Fiesta',
+      description: 'Barra libre y baile',
     },
   ];
 
@@ -39,9 +49,9 @@ const TimelineSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-label text-accent mb-4">Schedule</p>
-          <h2 className="heading-script text-4xl md:text-5xl text-foreground">
-            Order of the Day
+          <p className="text-label text-accent mb-4">Itinerario</p>
+          <h2 className="heading-display text-4xl md:text-5xl text-foreground">
+            Orden del día
           </h2>
         </motion.div>
 
@@ -68,7 +78,7 @@ const TimelineSection = () => {
                     index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'
                   }`}
                 >
-                  <span className="heading-display text-2xl text-primary">
+                  <span className="heading-display text-2xl text-primary tracking-[0.12em]">
                     {event.time}
                   </span>
                 </div>
@@ -82,10 +92,10 @@ const TimelineSection = () => {
                     index % 2 === 0 ? 'md:pl-8' : 'md:pr-8 md:text-right'
                   }`}
                 >
-                  <span className="md:hidden text-label text-primary mb-2 block">
+                  <span className="md:hidden text-label text-primary mb-2 block tracking-[0.22em]">
                     {event.time}
                   </span>
-                  <h3 className="heading-display text-xl text-foreground mb-1">
+                  <h3 className="heading-display text-xl md:text-[22px] text-foreground mb-1">
                     {event.title}
                   </h3>
                   <p className="text-body text-muted-foreground">
