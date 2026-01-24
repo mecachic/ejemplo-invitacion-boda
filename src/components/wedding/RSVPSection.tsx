@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 interface RSVPFormData {
   name: string;
@@ -11,12 +13,14 @@ interface RSVPFormData {
   message: string; // notas opcionales
 }
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnjpwooq';
-
 const RSVPSection = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const {
     register,
+    handleSubmit,
     formState: { errors },
+    reset,
     watch,
   } = useForm<RSVPFormData>({
     defaultValues: {
@@ -33,6 +37,20 @@ const RSVPSection = () => {
   const attending = watch('attending');
   const guests = watch('guests');
 
+  const onSubmit = async (data: RSVPFormData) => {
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+
+    toast.success('¡Gracias por confirmar!', {
+      description: 'Hemos recibido vuestra respuesta. Si hace falta, os contactaremos para coordinar los detalles.',
+    });
+
+    reset();
+    setIsSubmitting(false);
+  };
+
   return (
     <section id="rsvp" className="section-padding bg-secondary">
       <div className="max-w-2xl mx-auto">
@@ -48,8 +66,7 @@ const RSVPSection = () => {
             RSVP
           </h2>
           <p className="text-body text-muted-foreground">
-            Por favor, responded antes del{' '}
-            <span className="font-medium text-foreground">1 de abril de 2026</span>.
+            Por favor, responded antes del <span className="font-medium text-foreground">1 de abril de 2026</span>.
           </p>
         </motion.div>
 
@@ -58,14 +75,9 @@ const RSVPSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          action={FORMSPREE_ENDPOINT}
-          method="POST"
+          onSubmit={handleSubmit(onSubmit)}
           className="card-elegant p-8 md:p-12"
         >
-          {/* Formspree helpers */}
-          <input type="hidden" name="_subject" value="Nuevo RSVP — Giovanni & Sara" />
-          <input type="hidden" name="_template" value="table" />
-
           <div className="space-y-8">
             {/* Name + Email */}
             <div className="grid gap-8 md:grid-cols-2">
@@ -74,7 +86,6 @@ const RSVPSection = () => {
                   Nombre y apellidos *
                 </label>
                 <input
-                  name="name"
                   {...register('name', { required: 'Indica tu nombre' })}
                   className="input-elegant"
                   placeholder="Escribe tu nombre"
@@ -89,7 +100,6 @@ const RSVPSection = () => {
                   Email *
                 </label>
                 <input
-                  name="email"
                   {...register('email', {
                     required: 'Indica tu email',
                     pattern: {
@@ -118,7 +128,6 @@ const RSVPSection = () => {
                   <div className="flex items-center gap-3">
                     <input
                       {...register('attending', { required: 'Selecciona una opción' })}
-                      name="attending"
                       type="radio"
                       value="yes"
                       className="w-4 h-4 text-primary focus:ring-primary"
@@ -132,7 +141,6 @@ const RSVPSection = () => {
                   <div className="flex items-center gap-3">
                     <input
                       {...register('attending', { required: 'Selecciona una opción' })}
-                      name="attending"
                       type="radio"
                       value="no"
                       className="w-4 h-4 text-primary focus:ring-primary"
@@ -166,7 +174,6 @@ const RSVPSection = () => {
                     </p>
                     <select
                       {...register('guests')}
-                      name="guests"
                       className="input-elegant bg-transparent cursor-pointer"
                     >
                       <option value="1">1 persona</option>
@@ -189,7 +196,6 @@ const RSVPSection = () => {
                     </label>
                     <input
                       {...register('dietary')}
-                      name="dietary"
                       className="input-elegant"
                       placeholder="Vegetariano, vegan, intolerancias, etc."
                     />
@@ -208,7 +214,6 @@ const RSVPSection = () => {
                     </label>
                     <textarea
                       {...register('companions')}
-                      name="companions"
                       rows={3}
                       className="input-elegant resize-none"
                       placeholder="Ej.: Marta López, Carlos Pérez..."
@@ -225,7 +230,6 @@ const RSVPSection = () => {
               </label>
               <textarea
                 {...register('message')}
-                name="message"
                 rows={4}
                 className="input-elegant resize-none"
                 placeholder="Dejadnos aquí cualquier comentario..."
@@ -233,8 +237,12 @@ const RSVPSection = () => {
             </div>
 
             {/* Submit */}
-            <button type="submit" className="button-primary w-full">
-              Enviar confirmación
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="button-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Enviando...' : 'Enviar confirmación'}
             </button>
           </div>
         </motion.form>
