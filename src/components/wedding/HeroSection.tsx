@@ -68,16 +68,22 @@ const HeroSection = () => {
             June
           </div>
 
-          {/* Diamond */}
-          <div className="w-2.5 h-2.5 rotate-45 bg-white my-5" aria-hidden="true" />
+          {/* Diamond (top) */}
+          <div
+            className="w-2.5 h-2.5 rotate-45 bg-white opacity-85 mt-5 mb-4"
+            aria-hidden="true"
+          />
 
-          {/* Day */}
-          <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px]">
+          {/* Day (optical centering correction) */}
+          <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px] -mt-1 -mb-1">
             27
           </div>
 
-          {/* Diamond */}
-          <div className="w-2.5 h-2.5 rotate-45 bg-white my-6" aria-hidden="true" />
+          {/* Diamond (bottom) */}
+          <div
+            className="w-2.5 h-2.5 rotate-45 bg-white opacity-85 mt-4 mb-5"
+            aria-hidden="true"
+          />
 
           {/* Year */}
           <div className="font-display text-ivory/95 text-[22px] md:text-[28px] tracking-[0.22em]">
@@ -132,4 +138,5 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
 
