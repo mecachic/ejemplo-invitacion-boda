@@ -14,7 +14,12 @@ const EXIT_DELAY_MS = 800;
 const FLASH_LAST_SECONDS = 0.5;
 
 // Flash duration (ms) - you can fine tune later (480–720 works well)
-const FLASH_DURATION_MS = 560;
+// Flash duration (ms)
+// Usamos una duración ligeramente más larga para que el flash pueda:
+// 1) hacer un destello bonito
+// 2) cubrir toda la pantalla
+// 3) revelar la portada con un fade-out suave
+const FLASH_DURATION_MS = 900;
 
 const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
   const [isClicked, setIsClicked] = useState(false);

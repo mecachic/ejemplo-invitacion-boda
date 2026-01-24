@@ -45,12 +45,22 @@ export default function FlashTransition({
     if (!active) return;
 
     setRunning(true);
-    const t = window.setTimeout(() => {
-      setRunning(false);
+    // Queremos que el "swap" a la portada suceda cuando la pantalla ya está cubierta.
+    // Esto evita que se vea el corte entre escenas.
+    const midpointMs = Math.max(0, Math.round(durationMs * 0.5));
+
+    const tMid = window.setTimeout(() => {
       onDone?.();
+    }, midpointMs);
+
+    const tEnd = window.setTimeout(() => {
+      setRunning(false);
     }, durationMs);
 
-    return () => window.clearTimeout(t);
+    return () => {
+      window.clearTimeout(tMid);
+      window.clearTimeout(tEnd);
+    };
   }, [active, durationMs, onDone]);
 
   if (!running) return null;
@@ -68,11 +78,17 @@ export default function FlashTransition({
     100% { opacity: 0;   transform: scale(2.85); filter: blur(26px); }
   }
 
-  @keyframes ${animName}_spike {
+  /*
+    "Transition flash" (no solo destello):
+    - El burst aporta el destello realista.
+    - La capa cover garantiza que, durante un tramo, la pantalla queda cubierta al 100%
+      para poder hacer el swap de escena sin que se vea el corte.
+  */
+  @keyframes ${animName}_cover {
     0%   { opacity: 0; }
-    46%  { opacity: 0; }
-    49%  { opacity: 0.75; }
-    52%  { opacity: 0; }
+    26%  { opacity: 0; }
+    46%  { opacity: 1; }
+    76%  { opacity: 1; }
     100% { opacity: 0; }
   }
   `;
@@ -112,9 +128,11 @@ export default function FlashTransition({
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(255, 250, 242, 1)",
-          animation: `${animName}_spike ${durationMs}ms linear forwards`,
-          mixBlendMode: "screen",
+          /* Ivory sutil (más editorial que blanco puro) */
+          background: "rgba(250, 248, 244, 1)",
+          animation: `${animName}_cover ${durationMs}ms ease-in-out forwards`,
+          /* Sin blend mode: debe cubrir al 100% */
+          mixBlendMode: "normal",
         }}
       />
     </div>
