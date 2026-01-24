@@ -61,7 +61,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35 }}
-          className="heading-display text-2xl md:text-3xl lg:text-4xl text-ivory/90 mt-5 tracking-[0.14em] uppercase font-medium"
+          className="mt-5"
         >
           June 27, 2026
         </motion.p>
