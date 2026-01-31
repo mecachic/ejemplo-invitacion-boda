@@ -64,9 +64,9 @@ const HeroSection = () => {
         >
           {/* Month with fine lines */}
           <div className="flex items-center justify-center gap-5 font-body text-gold text-[14px] md:text-[16px] tracking-[0.34em] uppercase">
-            <span className="h-px w-16 md:w-24 bg-gold" aria-hidden="true" />
+            <span className="gold-fade-line w-16 md:w-24" aria-hidden="true" />
             <span>{t("hero.month")}</span>
-            <span className="h-px w-16 md:w-24 bg-gold" aria-hidden="true" />
+            <span className="gold-fade-line w-16 md:w-24" aria-hidden="true" />
           </div>
 
           {/* Day */}
@@ -76,9 +76,9 @@ const HeroSection = () => {
 
           {/* Year with fine lines */}
           <div className="flex items-center justify-center gap-5 font-body font-medium text-gold text-[15px] md:text-[17px] tracking-[0.26em] tabular-nums uppercase">
-            <span className="h-px w-16 md:w-24 bg-gold" aria-hidden="true" />
+            <span className="gold-fade-line w-16 md:w-24" aria-hidden="true" />
             <span>2026</span>
-            <span className="h-px w-16 md:w-24 bg-gold" aria-hidden="true" />
+            <span className="gold-fade-line w-16 md:w-24" aria-hidden="true" />
           </div>
         </motion.div>
 

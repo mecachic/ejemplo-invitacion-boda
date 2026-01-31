@@ -241,3 +241,22 @@
     }
   }
 }
+
+
+@layer components {
+  /* Fine line that fades out toward the edges (editorial separator). */
+  .gold-fade-line {
+    height: 1px;
+    display: block;
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--gold) / 0.0) 6%,
+      hsl(var(--gold) / 0.55) 20%,
+      hsl(var(--gold) / 1) 50%,
+      hsl(var(--gold) / 0.55) 80%,
+      hsl(var(--gold) / 0.0) 94%,
+      transparent 100%
+    );
+  }
+}
