@@ -63,7 +63,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35 }}
-          className="mt-10 flex flex-col items-center"
+          className="mt-10 flex flex-col items-center gap-5"
         >
           {/* Month */}
           <div className="font-display text-ivory/95 text-[18px] md:text-[22px] tracking-[0.28em] uppercase">
@@ -71,7 +71,7 @@ const HeroSection = () => {
           </div>
 
           {/* Diamond */}
-          <div className="w-2.5 h-2.5 rotate-45 bg-white my-5" aria-hidden="true" />
+          <div className="w-2.5 h-2.5 rotate-45 bg-white" aria-hidden="true" />
 
           {/* Day */}
           <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px]">
@@ -79,7 +79,7 @@ const HeroSection = () => {
           </div>
 
           {/* Diamond */}
-          <div className="w-2.5 h-2.5 rotate-45 bg-white my-6" aria-hidden="true" />
+          <div className="w-2.5 h-2.5 rotate-45 bg-white" aria-hidden="true" />
 
           {/* Year */}
           <div className="font-display text-ivory/95 text-[22px] md:text-[28px] tracking-[0.22em]">
