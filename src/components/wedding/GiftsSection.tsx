@@ -7,7 +7,7 @@ import { useI18n } from "@/i18n/I18nContext";
  * TODO: Sustituye este IBAN por el vuestro real antes de publicar.
  * Recomendación: si prefieres no dejarlo en abierto, puedes cargarlo desde una env var.
  */
-const DEFAULT_IBAN = "IT12V0760103400001015114455";
+const DEFAULT_IBAN = "ES00 XXXX XXXX XXXX XXXX XXXX";
 
 function copyToClipboard(text: string) {
   // Clipboard API (preferente)
@@ -148,6 +148,27 @@ const GiftsSection = () => {
                       </span>
                     )}
                   </button>
+                </div>
+
+                {/* Detalles bancarios (elegante y discreto) */}
+                <div className="mt-4 pt-4 border-t border-border/60 space-y-3">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <p className="text-xs text-muted-foreground tracking-wide">
+                      {t('gifts.iban.holder')}
+                    </p>
+                    <p className="text-sm text-foreground font-medium">
+                      {t('gifts.iban.holder.value')}
+                    </p>
+                  </div>
+
+                  <div className="flex items-baseline justify-between gap-4">
+                    <p className="text-xs text-muted-foreground tracking-wide">
+                      {t('gifts.iban.purpose')}
+                    </p>
+                    <p className="text-sm text-foreground font-medium">
+                      {t('gifts.iban.purpose.value')}
+                    </p>
+                  </div>
                 </div>
 
                 <p className="text-xs text-muted-foreground mt-3">{t('gifts.iban.ask')}</p>

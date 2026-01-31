@@ -118,6 +118,10 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.iban.hide": "Ocultar IBAN",
     "gifts.iban.copy": "Copiar",
     "gifts.iban.copied": "Copiado",
+    "gifts.iban.holder": "Titular",
+    "gifts.iban.holder.value": "Giovanni Rizzuti",
+    "gifts.iban.purpose": "Concepto",
+    "gifts.iban.purpose.value": "Regalo de matrimonio",
     "gifts.iban.ask": "Si lo prefieres, también puedes pedirnos los datos por mensaje.",
     "gifts.iban.aria": "Copiar IBAN",
 
@@ -276,6 +280,10 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.iban.hide": "Nascondi IBAN",
     "gifts.iban.copy": "Copia",
     "gifts.iban.copied": "Copiato",
+    "gifts.iban.holder": "Intestatario",
+    "gifts.iban.holder.value": "Giovanni Rizzuti",
+    "gifts.iban.purpose": "Causale",
+    "gifts.iban.purpose.value": "Regalo di matrimonio",
     "gifts.iban.ask": "Se preferite, potete anche chiederci i dati via messaggio.",
     "gifts.iban.aria": "Copia IBAN",
 
@@ -443,6 +451,10 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.iban.hide": "IBAN verbergen",
     "gifts.iban.copy": "Kopieren",
     "gifts.iban.copied": "Kopiert",
+    "gifts.iban.holder": "Kontoinhaber",
+    "gifts.iban.holder.value": "Giovanni Rizzuti",
+    "gifts.iban.purpose": "Verwendungszweck",
+    "gifts.iban.purpose.value": "Hochzeitsgeschenk",
     "gifts.iban.ask": "Wenn ihr möchtet, könnt ihr die Daten auch per Nachricht bei uns erfragen.",
     "gifts.iban.aria": "IBAN kopieren",
 
