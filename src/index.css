@@ -55,7 +55,8 @@
 
     /* Typography */
     --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Montserrat', sans-serif;
+    /* Prefer Söhne when available (commercial font). Fallback keeps the look consistent. */
+    --font-body: 'Söhne', 'Montserrat', sans-serif;
 
     /* Shadows */
     --shadow-soft: 0 4px 20px hsl(30 10% 20% / 0.08);

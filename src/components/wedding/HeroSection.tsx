@@ -36,7 +36,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
         >
-          <p className="text-label text-ivory/70 mb-3 tracking-[0.22em] uppercase">
+          <p className="text-label text-gold mb-3 tracking-[0.26em] uppercase">
             {t("hero.label")}
           </p>
         </motion.div>
@@ -49,11 +49,7 @@ const HeroSection = () => {
           className="font-scriptDate text-[44px] md:text-[60px] lg:text-[72px] text-ivory leading-[1.05] font-medium"
         >
           <span className="inline-block">Giovanni</span>
-          <span
-            // Cleaner & more present (connects the names without looking tiny).
-            className="inline-block mx-3 md:mx-4 text-gold/90 font-display font-medium tracking-[0.02em] text-[0.9em] md:text-[0.92em] align-middle translate-y-[0.02em]"
-            aria-hidden="true"
-          >
+          <span className="inline-block mx-3 md:mx-4" aria-hidden="true">
             &amp;
           </span>
           <span className="inline-block">Sara</span>
@@ -64,37 +60,37 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35 }}
-          className="mt-10 flex flex-col items-center gap-5"
+          className="mt-10 flex flex-col items-center gap-7"
         >
-          {/* Month */}
-          <div className="font-display text-ivory/95 text-[18px] md:text-[22px] tracking-[0.28em] uppercase">
-            {t("hero.month")}
+          {/* Month with fine lines */}
+          <div className="flex items-center justify-center gap-5 font-body text-gold text-[14px] md:text-[16px] tracking-[0.34em] uppercase">
+            <span className="h-px w-14 md:w-20 bg-gold" aria-hidden="true" />
+            <span>{t("hero.month")}</span>
+            <span className="h-px w-14 md:w-20 bg-gold" aria-hidden="true" />
           </div>
-
-          {/* Diamond */}
-          <div className="w-2.5 h-2.5 rotate-45 bg-white" aria-hidden="true" />
 
           {/* Day */}
-          <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px] tabular-nums text-center">
-            {/* Optical centering: tabular nums + left nudge for this font's '2'/'7' side bearings */}
-            <span className="inline-block -translate-x-[0.075em]">27</span>
+          <div className="font-scriptDate text-ivory leading-none tracking-[-0.01em] text-[120px] md:text-[160px] lg:text-[190px] tabular-nums text-center">
+            <span className="inline-block">27</span>
           </div>
 
-          {/* Diamond */}
-          <div className="w-2.5 h-2.5 rotate-45 bg-white" aria-hidden="true" />
-
-          {/* Year */}
-          <div className="font-display text-ivory/95 text-[22px] md:text-[28px] tracking-[0.22em]">
-            2026
+          {/* Year with fine lines */}
+          <div className="flex items-center justify-center gap-5 font-body text-gold text-[14px] md:text-[16px] tracking-[0.34em] tabular-nums">
+            <span className="h-px w-14 md:w-20 bg-gold" aria-hidden="true" />
+            <span>2026</span>
+            <span className="h-px w-14 md:w-20 bg-gold" aria-hidden="true" />
           </div>
         </motion.div>
+
+        {/* Spacer to push the location down (keeps hierarchy clean) */}
+        <div className="flex-1" aria-hidden="true" />
 
         {/* Location */}
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.9 }}
-          className="text-body text-ivory/70 tracking-[0.22em] uppercase mt-10"
+          className="font-body text-gold tracking-[0.26em] uppercase mb-[12vh] text-[11px] md:text-[12px]"
         >
           {t("hero.location")}
         </motion.p>

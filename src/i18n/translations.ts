@@ -17,7 +17,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     // Hero
     "hero.label": "Nos casamos",
     "hero.month": "Junio",
-    "hero.location": "Masseria Falco • Cellole (CE)",
+    "hero.location": "Masseria Falco • Cellole",
     "hero.scroll": "Desliza para continuar",
 
     // Countdown
@@ -171,7 +171,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
 
     "hero.label": "Ci sposiamo",
     "hero.month": "Giugno",
-    "hero.location": "Masseria Falco • Cellole (CE)",
+    "hero.location": "Masseria Falco • Cellole",
     "hero.scroll": "Scorri per continuare",
 
     "countdown.kicker": "Conto alla rovescia per",
@@ -328,7 +328,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
 
     "hero.label": "Wir heiraten",
     "hero.month": "Juni",
-    "hero.location": "Masseria Falco • Cellole (CE)",
+    "hero.location": "Masseria Falco • Cellole",
     "hero.scroll": "Scrollen zum Fortfahren",
 
     "countdown.kicker": "Countdown bis",
