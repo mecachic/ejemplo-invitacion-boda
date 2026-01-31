@@ -50,8 +50,8 @@ const HeroSection = () => {
         >
           <span className="inline-block">Giovanni</span>
           <span
-            // Simpler, more elegant ampersand: smaller, no tracking, different font for contrast.
-            className="inline-block mx-3 md:mx-5 text-gold/85 font-display text-[0.68em] leading-none"
+            // Keep it editorial but proportional: same family as names, smaller, subtle gold.
+            className="inline-block mx-3 md:mx-5 text-gold/85 font-scriptDate text-[0.52em] leading-none -translate-y-[0.02em]"
             aria-hidden="true"
           >
             &amp;
@@ -77,7 +77,7 @@ const HeroSection = () => {
           {/* Day */}
           <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px]">
             {/* Optical centering: this font's numerals have asymmetric side-bearings */}
-            <span className="inline-block translate-x-[0.04em]">27</span>
+            <span className="inline-block -translate-x-[0.055em]">27</span>
           </div>
 
           {/* Diamond */}

@@ -132,7 +132,9 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
 
             {/* Tap to open */}
             <motion.div
-              className="absolute bottom-20 left-1/2 -translate-x-1/2 text-center"
+              // Use inset-x-0 + flex centering to avoid any translate/subpixel drift
+              // and keep it perfectly centered on every viewport.
+              className="absolute inset-x-0 bottom-[calc(5rem+env(safe-area-inset-bottom))] flex flex-col items-center text-center px-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: isClicked ? 0 : 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
