@@ -255,11 +255,11 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
       "Sono più che benvenuti. Avremo animatori per far divertire i più piccoli mentre voi vi godete la festa in tranquillità.",
     "quick.rsvp.title": "Conferma presenza",
     "quick.rsvp.body":
-      "Vi chiediamo di confermare il prima possibile per organizzarci con calma.",
+      "Vi chiediamo di confermare il prima possibile per organizzare con calma la prenotazione di camere e transfert.",
 
     "acc.kicker": "DOVE ALLOGGIARE",
     "acc.title": "Alloggio e trasferimento",
-    "acc.p1": "Per la notte di sabato vogliamo che dobbiate solo divertirvi.",
+    "acc.p1": "Per la notte di sabato vorremmo solo che vi divertiste.",
     "acc.b1": "All’arrivo a Napoli, se necessario organizzeremo noi il trasferimento.",
     "acc.b2":
       "L’alloggio sarà molto vicino alla location, così potrete pensare solo a godervi l’evento senza orari o spostamenti.",
@@ -270,9 +270,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.title": "Regali",
     "gifts.intro":
       "La vostra presenza è il regalo più bello. Se però vi va di farci un pensiero, qui sotto trovate due opzioni, sempre del tutto facoltative.",
-    "gifts.trip.title": "Viaggio futuro",
     "gifts.trip.body":
-      "Non faremo la luna di miele subito dopo il matrimonio. Più avanti vorremmo fare un viaggio speciale, e il Giappone è uno dei nostri grandi sogni. Se volete contribuire, ve ne saremo davvero grati.",
     "gifts.contrib.title": "Contributo",
     "gifts.contrib.body":
       "Per chi preferisce fare un contributo, lasciamo i dati in modo discreto. Non è assolutamente necessario, ma sarà accolto con grande affetto.",
