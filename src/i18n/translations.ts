@@ -99,7 +99,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "acc.p1": "Para la noche del sábado, queremos que solo tengáis que disfrutar.",
     "acc.b1": "Al llegar a Nápoles, nos encargaremos de organizar el traslado, si lo necesitáis.",
     "acc.b2":
-      "El alojamiento estará ubicado muy cerca del lugar de celebración, de modo que podáis concentraros únicamente en disfrutar del evento sin atender a horarios ni desplazamientos.",
+      "El alojamiento estará ubicado muy cerca del lugar de celebración, de modo que podáis concentraros únicamente en disfrutar del evento.",
     "acc.p2":
       "Todo lo coordinaremos personalmente con vosotros una vez confirmada la asistencia, para que no tengáis que preocuparos por nada.",
 
@@ -257,7 +257,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "acc.p1": "Per la notte di sabato vorremmo solo che vi divertiste.",
     "acc.b1": "All’arrivo a Napoli, se necessario organizzeremo noi il trasferimento.",
     "acc.b2":
-      "L’alloggio sarà molto vicino alla location, così potrete pensare solo a godervi l’evento senza orari o spostamenti.",
+      "L’alloggio sarà molto vicino alla location, così potrete pensare solo a godervi l’evento.",
     "acc.p2":
       "Coordineremo tutto direttamente con voi una volta confermata la presenza, così non dovrete preoccuparvi di nulla.",
 
