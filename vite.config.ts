@@ -4,7 +4,7 @@ import path from "path";
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: mode === "github" ? "/invitacion-boda/" : "/",
+  base: mode === "github" ? "/ejemplo-invitacion-boda/" : "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
