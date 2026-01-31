@@ -109,9 +109,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.intro":
       "Vuestra presencia será el mejor regalo. Si además os apetece tener un detalle con nosotros, a continuación encontraréis las instrucciones.",
         "gifts.contrib.title": "Aportación",
-    "gifts.contrib.body":
-      "Para quienes prefieran hacer una aportación, os dejamos los datos de forma discreta. No es en absoluto necesario, pero será recibido con enorme cariño.",
-    "gifts.iban.show": "Ver IBAN",
+        "gifts.iban.show": "Ver IBAN",
     "gifts.iban.hide": "Ocultar IBAN",
     "gifts.iban.copy": "Copiar",
     "gifts.iban.copied": "Copiado",
@@ -268,9 +266,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.intro":
       "La vostra presenza sarà il regalo più bello. Se nel contempo vi va di farci un pensiero, qui sotto troverete le istruzioni.",
         "gifts.contrib.title": "Contributo",
-    "gifts.contrib.body":
-      "Per chi preferisce fare un contributo, lasciamo i dati in modo discreto. Non è assolutamente necessario, ma sarà accolto con grande affetto.",
-    "gifts.iban.show": "Mostra IBAN",
+        "gifts.iban.show": "Mostra IBAN",
     "gifts.iban.hide": "Nascondi IBAN",
     "gifts.iban.copy": "Copia",
     "gifts.iban.copied": "Copiato",
@@ -435,9 +431,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.title": "Geschenke",
     "gifts.intro":
       "Eure Anwesenheit wird das schönste Geschenk sein. Falls ihr uns zusätzlich eine Freude machen möchtet, findet ihr unten die entsprechenden Hinweise.",    "gifts.contrib.title": "Beitrag",
-    "gifts.contrib.body":
-      "Für alle, die lieber einen Beitrag geben möchten: Hier sind die Daten diskret hinterlegt. Es ist absolut nicht nötig, aber wir nehmen es mit viel Dankbarkeit an.",
-    "gifts.iban.show": "IBAN anzeigen",
+        "gifts.iban.show": "IBAN anzeigen",
     "gifts.iban.hide": "IBAN verbergen",
     "gifts.iban.copy": "Kopieren",
     "gifts.iban.copied": "Kopiert",
