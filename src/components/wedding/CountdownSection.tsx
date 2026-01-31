@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useI18n } from '@/i18n/I18nContext';
 
 const CountdownSection = () => {
+  const { t } = useI18n();
   const weddingDate = new Date('2026-06-27T17:30:00');
   
   const [timeLeft, setTimeLeft] = useState({
@@ -33,10 +35,10 @@ const CountdownSection = () => {
   }, []);
 
   const timeUnits = [
-    { value: timeLeft.days, label: 'Days' },
-    { value: timeLeft.hours, label: 'Hours' },
-    { value: timeLeft.minutes, label: 'Minutes' },
-    { value: timeLeft.seconds, label: 'Seconds' },
+    { value: timeLeft.days, label: t('countdown.days') },
+    { value: timeLeft.hours, label: t('countdown.hours') },
+    { value: timeLeft.minutes, label: t('countdown.minutes') },
+    { value: timeLeft.seconds, label: t('countdown.seconds') },
   ];
 
   return (
@@ -49,7 +51,7 @@ const CountdownSection = () => {
           transition={{ duration: 0.6 }}
           className="text-label text-primary mb-4"
         >
-          Counting Down To
+          {t('countdown.kicker')}
         </motion.p>
 
         <motion.h2
@@ -59,7 +61,7 @@ const CountdownSection = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="heading-script text-4xl md:text-5xl text-foreground mb-12"
         >
-          Our Special Day
+          {t('countdown.title')}
         </motion.h2>
 
         <motion.div

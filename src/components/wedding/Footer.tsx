@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import { useI18n } from '@/i18n/I18nContext';
 
 const Footer = () => {
+  const { t } = useI18n();
   return (
     <footer className="py-16 px-6 bg-charcoal text-ivory">
       <div className="max-w-4xl mx-auto text-center">
@@ -23,19 +25,16 @@ const Footer = () => {
 
           {/* Date */}
           <p className="heading-display text-lg text-ivory/70 mb-8">
-            June 27, 2026 • Masseria Falco, Cellole (CE), Italy
+            {t('footer.dateLine')}
           </p>
 
           {/* Thank You Message */}
           <p className="text-body text-ivory/60 text-sm max-w-md mx-auto mb-8">
-            Thank you for celebrating this special moment with us.
-            We can't wait to see you there.
+            {t('footer.thanks')}
           </p>
 
           {/* Copyright */}
-          <p className="text-xs text-ivory/40">
-            Made with love for our closest family and friends
-          </p>
+          <p className="text-xs text-ivory/40">{t('footer.made')}</p>
         </motion.div>
       </div>
     </footer>

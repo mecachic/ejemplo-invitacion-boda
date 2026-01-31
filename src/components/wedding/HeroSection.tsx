@@ -2,9 +2,11 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 
 import petalsVideo from "@/assets/petals-hero.mp4";
+import { useI18n } from "@/i18n/I18nContext";
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { t } = useI18n();
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
@@ -35,7 +37,7 @@ const HeroSection = () => {
           transition={{ duration: 0.9, delay: 0.2 }}
         >
           <p className="text-label text-ivory/70 mb-3 tracking-[0.22em] uppercase">
-            We&apos;re Getting Married
+            {t("hero.label")}
           </p>
         </motion.div>
 
@@ -65,7 +67,7 @@ const HeroSection = () => {
         >
           {/* Month */}
           <div className="font-display text-ivory/95 text-[18px] md:text-[22px] tracking-[0.28em] uppercase">
-            June
+            {t("hero.month")}
           </div>
 
           {/* Diamond */}
@@ -92,7 +94,7 @@ const HeroSection = () => {
           transition={{ duration: 0.9, delay: 0.9 }}
           className="text-body text-ivory/70 tracking-[0.22em] uppercase mt-10"
         >
-          Masseria Falco • Cellole (CE)
+          {t("hero.location")}
         </motion.p>
       </div>
 
@@ -104,7 +106,7 @@ const HeroSection = () => {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center"
       >
         <p className="text-[10px] md:text-xs font-medium uppercase tracking-[0.26em] text-ivory/50 mb-3">
-          Scroll to Continue
+          {t("hero.scroll")}
         </p>
 
         <motion.div

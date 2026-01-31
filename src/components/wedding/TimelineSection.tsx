@@ -1,41 +1,43 @@
 import { motion } from 'framer-motion';
+import { useI18n } from '@/i18n/I18nContext';
 
 const TimelineSection = () => {
+  const { t } = useI18n();
   const events = [
     {
-      time: '17:00',
-      title: 'Cocktail de bienvenida',
-      description: 'Aperitivo de bienvenida en el jardín',
+      time: t('timeline.e1.time'),
+      title: t('timeline.e1.title'),
+      description: t('timeline.e1.desc'),
     },
     {
-      time: '18:00',
-      title: 'Ceremonia',
-      description: 'Intercambio de votos',
+      time: t('timeline.e2.time'),
+      title: t('timeline.e2.title'),
+      description: t('timeline.e2.desc'),
     },
     {
-      time: '19:00',
-      title: 'Apertura buffet',
-      description: 'Selección de aperitivos',
+      time: t('timeline.e3.time'),
+      title: t('timeline.e3.title'),
+      description: t('timeline.e3.desc'),
     },
     {
-      time: '20:00',
-      title: 'Llegada de los novios',
-      description: 'Brindis y saludos',
+      time: t('timeline.e4.time'),
+      title: t('timeline.e4.title'),
+      description: t('timeline.e4.desc'),
     },
     {
-      time: '20:30',
-      title: 'Cena',
-      description: 'Inicio de la cena',
+      time: t('timeline.e5.time'),
+      title: t('timeline.e5.title'),
+      description: t('timeline.e5.desc'),
     },
     {
-      time: '22:30',
-      title: 'Tarta nupcial',
-      description: 'Momento tarta',
+      time: t('timeline.e6.time'),
+      title: t('timeline.e6.title'),
+      description: t('timeline.e6.desc'),
     },
     {
-      time: '23:00',
-      title: 'Fiesta',
-      description: 'Barra libre y baile',
+      time: t('timeline.e7.time'),
+      title: t('timeline.e7.title'),
+      description: t('timeline.e7.desc'),
     },
   ];
 
@@ -49,9 +51,9 @@ const TimelineSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-label text-accent mb-4">Itinerario</p>
+          <p className="text-label text-accent mb-4">{t('timeline.kicker')}</p>
           <h2 className="heading-display text-4xl md:text-5xl text-foreground">
-            Orden del día
+            {t('timeline.title')}
           </h2>
         </motion.div>
 

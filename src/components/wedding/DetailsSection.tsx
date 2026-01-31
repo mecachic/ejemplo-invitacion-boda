@@ -1,24 +1,26 @@
 import { motion } from 'framer-motion';
 import { MapPin, Clock, CalendarDays } from 'lucide-react';
 import venueImage from '@/assets/venue.jpg';
+import { useI18n } from '@/i18n/I18nContext';
 
 const DetailsSection = () => {
+  const { t } = useI18n();
   const details = [
     {
       icon: CalendarDays,
-      title: 'Date',
-      content: 'Saturday, June 27th, 2026',
+      title: t('details.date.title'),
+      content: t('details.date.content'),
     },
     {
       icon: Clock,
-      title: 'Time',
-      content: 'Ceremony begins at 5:00 PM',
+      title: t('details.time.title'),
+      content: t('details.time.content'),
     },
     {
       icon: MapPin,
-      title: 'Venue',
-      content: 'Masseria Falco',
-      subcontent: 'Via Quintola, 1 • loc. Civette • 81030 Cellole (CE), Italy',
+      title: t('details.venue.title'),
+      content: t('details.venue.content'),
+      subcontent: t('details.venue.sub'),
     },
   ];
 
@@ -32,9 +34,9 @@ const DetailsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-label text-accent mb-4">Join Us</p>
+          <p className="text-label text-accent mb-4">{t('details.kicker')}</p>
           <h2 className="heading-script text-4xl md:text-5xl text-foreground">
-            Wedding Details
+            {t('details.title')}
           </h2>
         </motion.div>
 
@@ -50,7 +52,7 @@ const DetailsSection = () => {
             <div className="aspect-[4/3] overflow-hidden rounded-sm">
               <img
                 src={venueImage}
-                alt="Wedding Venue"
+                  alt={t('details.imgAlt')}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -105,7 +107,7 @@ const DetailsSection = () => {
               className="inline-flex items-center gap-2 text-primary hover:text-sage-dark transition-colors text-label mt-6"
             >
               <MapPin className="w-4 h-4" />
-              View on Google Maps
+              {t('details.map')}
             </motion.a>
           </motion.div>
         </div>

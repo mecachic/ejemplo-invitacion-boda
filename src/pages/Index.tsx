@@ -9,6 +9,7 @@ import FAQSection from '@/components/wedding/FAQSection';
 import GiftsSection from '@/components/wedding/GiftsSection';
 import RSVPSection from '@/components/wedding/RSVPSection';
 import Footer from '@/components/wedding/Footer';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const Index = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -19,6 +20,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <LanguageSwitcher />
       {/* Cinematic Intro Overlay */}
       {showIntro && <IntroOverlay onComplete={handleIntroComplete} />}
 

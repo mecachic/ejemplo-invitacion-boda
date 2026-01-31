@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { useI18n } from '@/i18n/I18nContext';
 
 interface RSVPFormData {
   name: string;
@@ -15,6 +16,7 @@ interface RSVPFormData {
 
 const RSVPSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t } = useI18n();
 
   const {
     register,
@@ -63,17 +65,15 @@ const RSVPSection = () => {
         throw new Error(`Formspree error ${res.status}: ${text}`);
       }
 
-      toast.success('¡Gracias por confirmar!', {
-        description:
-          'Hemos recibido vuestra respuesta. Si hace falta, os contactaremos para coordinar los detalles.',
+      toast.success(t('rsvp.toast.success'), {
+        description: t('rsvp.toast.success.desc'),
       });
 
       reset();
     } catch (e) {
       console.error(e);
-      toast.error('No se pudo enviar el RSVP', {
-        description:
-          'Revisa tu conexión e inténtalo de nuevo. Si persiste, avísanos por WhatsApp.',
+      toast.error(t('rsvp.toast.error'), {
+        description: t('rsvp.toast.error.desc'),
       });
     } finally {
       setIsSubmitting(false);
@@ -90,12 +90,13 @@ const RSVPSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-label text-accent mb-4">CONFIRMACIÓN</p>
+          <p className="text-label text-accent mb-4">{t('rsvp.kicker')}</p>
           <h2 className="heading-script text-4xl md:text-5xl text-foreground mb-4">
-            RSVP
+            {t('rsvp.title')}
           </h2>
           <p className="text-body text-muted-foreground">
-            Por favor, responded antes del <span className="font-medium text-foreground">1 de abril de 2026</span>.
+            {t('rsvp.deadline')}
+            <span className="font-medium text-foreground">{t('rsvp.deadline.date')}</span>.
           </p>
         </motion.div>
 
@@ -112,12 +113,12 @@ const RSVPSection = () => {
             <div className="grid gap-8 md:grid-cols-2">
               <div>
                 <label className="text-label text-muted-foreground block mb-2">
-                  Nombre y apellidos *
+                  {t('rsvp.name.label')}
                 </label>
                 <input
-                  {...register('name', { required: 'Indica tu nombre' })}
+                  {...register('name', { required: t('rsvp.err.name') })}
                   className="input-elegant"
-                  placeholder="Escribe tu nombre"
+                  placeholder={t('rsvp.name.placeholder')}
                 />
                 {errors.name && (
                   <p className="text-destructive text-sm mt-2">{errors.name.message}</p>
@@ -126,19 +127,19 @@ const RSVPSection = () => {
 
               <div>
                 <label className="text-label text-muted-foreground block mb-2">
-                  Email *
+                  {t('rsvp.email.label')}
                 </label>
                 <input
                   {...register('email', {
-                    required: 'Indica tu email',
+                    required: t('rsvp.err.email'),
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Email no válido',
+                      message: t('rsvp.err.email.invalid'),
                     },
                   })}
                   type="email"
                   className="input-elegant"
-                  placeholder="nombre@correo.com"
+                  placeholder={t('rsvp.email.placeholder')}
                 />
                 {errors.email && (
                   <p className="text-destructive text-sm mt-2">{errors.email.message}</p>
@@ -148,35 +149,35 @@ const RSVPSection = () => {
 
             {/* Attending */}
             <div>
-              <label className="text-label text-muted-foreground block mb-4">
-                ¿Asistirás? *
-              </label>
+                <label className="text-label text-muted-foreground block mb-4">
+                  {t('rsvp.attending.label')}
+                </label>
 
               <div className="grid gap-3 sm:grid-cols-2">
                 <label className="flex items-center justify-between gap-3 cursor-pointer rounded-xl border border-border px-4 py-3 bg-white/60">
                   <div className="flex items-center gap-3">
                     <input
-                      {...register('attending', { required: 'Selecciona una opción' })}
+                      {...register('attending', { required: t('rsvp.err.attending') })}
                       type="radio"
                       value="yes"
                       className="w-4 h-4 text-primary focus:ring-primary"
                     />
-                    <span className="text-body">Sí, asistiré</span>
+                    <span className="text-body">{t('rsvp.attending.yes')}</span>
                   </div>
-                  <span className="text-muted-foreground text-sm">Confirmo</span>
+                  <span className="text-muted-foreground text-sm">{t('rsvp.attending.yes.hint')}</span>
                 </label>
 
                 <label className="flex items-center justify-between gap-3 cursor-pointer rounded-xl border border-border px-4 py-3 bg-white/60">
                   <div className="flex items-center gap-3">
                     <input
-                      {...register('attending', { required: 'Selecciona una opción' })}
+                      {...register('attending', { required: t('rsvp.err.attending') })}
                       type="radio"
                       value="no"
                       className="w-4 h-4 text-primary focus:ring-primary"
                     />
-                    <span className="text-body">No podré asistir</span>
+                    <span className="text-body">{t('rsvp.attending.no')}</span>
                   </div>
-                  <span className="text-muted-foreground text-sm">Lo siento</span>
+                  <span className="text-muted-foreground text-sm">{t('rsvp.attending.no.hint')}</span>
                 </label>
               </div>
 
@@ -196,21 +197,21 @@ const RSVPSection = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <label className="text-label text-muted-foreground block mb-2">
-                      ¿Cuántas personas vendréis? *
+                      {t('rsvp.guests.label')}
                     </label>
                     <p className="text-sm text-muted-foreground mb-3">
-                      Incluye tu asistencia en el total.
+                      {t('rsvp.guests.help')}
                     </p>
                     <select
                       {...register('guests')}
                       className="input-elegant bg-transparent cursor-pointer"
                     >
-                      <option value="1">1 persona</option>
-                      <option value="2">2 personas</option>
-                      <option value="3">3 personas</option>
-                      <option value="4">4 personas</option>
-                      <option value="5">5 personas</option>
-                      <option value="6">6 personas</option>
+                      <option value="1">{t('rsvp.guests.1')}</option>
+                      <option value="2">{t('rsvp.guests.2')}</option>
+                      <option value="3">{t('rsvp.guests.3')}</option>
+                      <option value="4">{t('rsvp.guests.4')}</option>
+                      <option value="5">{t('rsvp.guests.5')}</option>
+                      <option value="6">{t('rsvp.guests.6')}</option>
                     </select>
                   </motion.div>
 
@@ -221,12 +222,12 @@ const RSVPSection = () => {
                     transition={{ duration: 0.3, delay: 0.05 }}
                   >
                     <label className="text-label text-muted-foreground block mb-2">
-                      Alergias o restricciones (opcional)
+                      {t('rsvp.dietary.label')}
                     </label>
                     <input
                       {...register('dietary')}
                       className="input-elegant"
-                      placeholder="Vegetariano, vegan, intolerancias, etc."
+                      placeholder={t('rsvp.dietary.placeholder')}
                     />
                   </motion.div>
                 </div>
@@ -239,13 +240,13 @@ const RSVPSection = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <label className="text-label text-muted-foreground block mb-2">
-                      Nombres de los acompañantes (opcional)
+                      {t('rsvp.companions.label')}
                     </label>
                     <textarea
                       {...register('companions')}
                       rows={3}
                       className="input-elegant resize-none"
-                      placeholder="Ej.: Marta López, Carlos Pérez..."
+                      placeholder={t('rsvp.companions.placeholder')}
                     />
                   </motion.div>
                 )}
@@ -255,13 +256,13 @@ const RSVPSection = () => {
             {/* Message */}
             <div>
               <label className="text-label text-muted-foreground block mb-2">
-                Nota para los novios (opcional)
+                {t('rsvp.message.label')}
               </label>
               <textarea
                 {...register('message')}
                 rows={4}
                 className="input-elegant resize-none"
-                placeholder="Dejadnos aquí cualquier comentario..."
+                placeholder={t('rsvp.message.placeholder')}
               />
             </div>
 
@@ -271,7 +272,7 @@ const RSVPSection = () => {
               disabled={isSubmitting}
               className="button-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Enviando...' : 'Enviar confirmación'}
+              {isSubmitting ? t('rsvp.submitting') : t('rsvp.submit')}
             </button>
           </div>
         </motion.form>

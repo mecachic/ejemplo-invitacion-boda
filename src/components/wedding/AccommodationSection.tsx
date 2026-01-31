@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
+import { useI18n } from '@/i18n/I18nContext';
 
 const AccommodationSection = () => {
+  const { t } = useI18n();
   return (
     <section id="accommodation" className="section-padding bg-background">
       <div className="max-w-6xl mx-auto">
@@ -11,28 +13,28 @@ const AccommodationSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <p className="text-label text-accent mb-4">DÓNDE ALOJARSE</p>
+          <p className="text-label text-accent mb-4">{t('acc.kicker')}</p>
           <h2 className="heading-script text-4xl md:text-5xl text-foreground mb-6">
-            Alojamiento y traslado
+            {t('acc.title')}
           </h2>
 
           <div className="max-w-2xl mx-auto space-y-5">
             <p className="text-body text-muted-foreground">
-              <strong>Para la noche del sábado, queremos que solo tengáis que disfrutar.</strong>
+              <strong>{t('acc.p1')}</strong>
             </p>
 
             <p className="text-body text-muted-foreground">
               <span className="text-accent mr-2" aria-hidden="true">✦</span>
-              Al llegar a Nápoles, nos encargaremos de organizar el traslado, si lo necesitáis.
+              {t('acc.b1')}
             </p>
 
             <p className="text-body text-muted-foreground">
               <span className="text-accent mr-2" aria-hidden="true">✦</span>
-              El alojamiento estará ubicado muy cerca del lugar de celebración, de modo que podáis concentraros únicamente en disfrutar del evento sin atender a horarios ni desplazamientos.
+              {t('acc.b2')}
             </p>
 
             <p className="text-body text-muted-foreground">
-              Todo lo coordinaremos personalmente con vosotros una vez confirmada la asistencia, para que no tengáis que preocuparos por nada.
+              {t('acc.p2')}
             </p>
           </div>
         </motion.div>

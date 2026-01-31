@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Plane, CreditCard, Copy, Check } from "lucide-react";
+import { useI18n } from "@/i18n/I18nContext";
 
 /**
  * TODO: Sustituye este IBAN por el vuestro real antes de publicar.
@@ -34,6 +35,7 @@ function copyToClipboard(text: string) {
 }
 
 const GiftsSection = () => {
+  const { t } = useI18n();
   const IBAN = useMemo(() => {
     // Si defines VITE_GIFT_IBAN en .env, se usará automáticamente.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,13 +67,12 @@ const GiftsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-label text-accent mb-4">VUESTRA GENEROSIDAD</p>
+          <p className="text-label text-accent mb-4">{t('gifts.kicker')}</p>
           <h2 className="heading-script text-4xl md:text-5xl text-foreground mb-4">
-            Regalos
+            {t('gifts.title')}
           </h2>
           <p className="text-body text-muted-foreground max-w-2xl mx-auto">
-            Vuestra presencia es el mejor regalo. Si aun así os apetece tener un detalle con
-            nosotros, dejamos aquí dos opciones, siempre de forma totalmente opcional.
+            {t('gifts.intro')}
           </p>
         </motion.div>
 
@@ -88,12 +89,10 @@ const GiftsSection = () => {
               <Plane className="w-7 h-7 text-primary" />
             </div>
 
-            <h3 className="heading-display text-xl text-foreground mb-3">Viaje futuro</h3>
+            <h3 className="heading-display text-xl text-foreground mb-3">{t('gifts.trip.title')}</h3>
 
             <p className="text-body text-muted-foreground text-sm">
-              No haremos luna de miel justo después de la boda. Más adelante nos gustaría realizar un
-              viaje especial, y Japón es uno de nuestros grandes sueños. Si queréis contribuir a
-              hacerlo realidad, os lo agradeceremos muchísimo.
+              {t('gifts.trip.body')}
             </p>
           </motion.div>
 
@@ -109,11 +108,10 @@ const GiftsSection = () => {
               <CreditCard className="w-7 h-7 text-primary" />
             </div>
 
-            <h3 className="heading-display text-xl text-foreground mb-3">Aportación</h3>
+            <h3 className="heading-display text-xl text-foreground mb-3">{t('gifts.contrib.title')}</h3>
 
             <p className="text-body text-muted-foreground text-sm mb-6">
-              Para quienes prefieran hacer una aportación, os dejamos los datos de forma discreta.
-              No es en absoluto necesario, pero será recibido con enorme cariño.
+              {t('gifts.contrib.body')}
             </p>
 
             <button
@@ -122,7 +120,7 @@ const GiftsSection = () => {
               onClick={() => setShowIban((v) => !v)}
               aria-expanded={showIban}
             >
-              {showIban ? "Ocultar IBAN" : "Ver IBAN"}
+              {showIban ? t('gifts.iban.hide') : t('gifts.iban.show')}
             </button>
 
             {showIban && (
@@ -138,23 +136,21 @@ const GiftsSection = () => {
                     type="button"
                     onClick={onCopy}
                     className="button-outline px-4 py-2"
-                    aria-label="Copiar IBAN"
+                    aria-label={t('gifts.iban.aria')}
                   >
                     {copied ? (
                       <span className="inline-flex items-center gap-2">
-                        <Check className="w-4 h-4" /> Copiado
+                        <Check className="w-4 h-4" /> {t('gifts.iban.copied')}
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-2">
-                        <Copy className="w-4 h-4" /> Copiar
+                        <Copy className="w-4 h-4" /> {t('gifts.iban.copy')}
                       </span>
                     )}
                   </button>
                 </div>
 
-                <p className="text-xs text-muted-foreground mt-3">
-                  Si lo prefieres, también puedes pedirnos los datos por mensaje.
-                </p>
+                <p className="text-xs text-muted-foreground mt-3">{t('gifts.iban.ask')}</p>
               </div>
             )}
           </motion.div>

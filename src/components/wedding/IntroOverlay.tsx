@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import envelopeVideo from "@/assets/envelope-intro.mp4";
 import FlashTransition from "@/components/wedding/FlashTransition";
+import { useI18n } from "@/i18n/I18nContext";
 
 interface IntroOverlayProps {
   onComplete: () => void;
@@ -30,6 +31,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
   const [flashArmed, setFlashArmed] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     document.body.classList.add("scroll-locked");
@@ -93,7 +95,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
           className="fixed inset-0 z-50 cursor-pointer"
           onClick={handleClick}
           role="button"
-          aria-label="Open invitation"
+          aria-label={t('intro.aria.open')}
         >
           {/* Background */}
           <div className="absolute inset-0 bg-charcoal" />
@@ -133,7 +135,7 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
               animate={{ opacity: isClicked ? 0 : 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              <p className="text-label text-ivory/80 mb-2">Tap to Open</p>
+              <p className="text-label text-ivory/80 mb-2">{t('intro.tap')}</p>
 
               <motion.div
                 className="w-8 h-8 mx-auto border border-ivory/40 rounded-full flex items-center justify-center"

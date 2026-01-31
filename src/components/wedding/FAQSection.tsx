@@ -6,6 +6,7 @@ import {
   AlertTriangle,
   CheckCircle2,
 } from "lucide-react";
+import { useI18n } from "@/i18n/I18nContext";
 
 type IconProps = { className?: string };
 
@@ -45,42 +46,37 @@ type QuickItem = {
 };
 
 const FAQSection = () => {
+  const { t } = useI18n();
   const items: QuickItem[] = [
     {
       icon: Car,
-      title: "Llegada y aparcamiento",
-      body:
-        "La masseria se encuentra en plena naturaleza y dispone de una amplia zona de aparcamiento privado dentro del recinto, para que podáis llegar con total comodidad y sin preocupaciones.",
+      title: t("quick.parking.title"),
+      body: t("quick.parking.body"),
     },
     {
       icon: Sparkles,
-      title: "Dress Code",
-      body:
-        "Elegante, libre y con color. Nos encanta que cada invitado exprese su estilo: lo importante es que vengáis cómodos, guapos y vosotros mismos.",
+      title: t("quick.dress.title"),
+      body: t("quick.dress.body"),
     },
     {
       icon: UtensilsCrossed,
-      title: "Menú",
-      body:
-        "El menú estará centrado principalmente en pescado y propuestas mediterráneas, con opciones variadas pensadas para que todos puedan disfrutar cómodamente de la cena.",
+      title: t("quick.menu.title"),
+      body: t("quick.menu.body"),
     },
     {
       icon: AlertTriangle,
-      title: "Alergias o restricciones",
-      body:
-        "Indícanos cualquier alergia o restricción alimentaria al confirmar asistencia y la adaptaremos.",
+      title: t("quick.allergies.title"),
+      body: t("quick.allergies.body"),
     },
     {
       icon: ClownIcon,
-      title: "Niños",
-      body:
-        "Son más que bienvenidos. Contaremos con animadores para que los más pequeños se diviertan mientras vosotros disfrutáis con total tranquilidad.",
+      title: t("quick.kids.title"),
+      body: t("quick.kids.body"),
     },
     {
       icon: CheckCircle2,
-      title: "Confirmación de asistencia",
-      body:
-        "Os agradeceremos que confirméis lo antes posible para poder organizarlo todo con calma.",
+      title: t("quick.rsvp.title"),
+      body: t("quick.rsvp.body"),
     },
   ];
 
@@ -94,9 +90,9 @@ const FAQSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-label text-accent mb-4">DETALLES RÁPIDOS</p>
+          <p className="text-label text-accent mb-4">{t("quick.kicker")}</p>
           <h2 className="heading-script text-4xl md:text-5xl text-foreground">
-            Para que todo sea fácil
+            {t("quick.title")}
           </h2>
         </motion.div>
 
