@@ -46,7 +46,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.55 }}
-          className="font-scriptDate text-[44px] md:text-[60px] lg:text-[72px] text-ivory leading-[1.05] font-medium"
+          className="font-display italic text-[46px] md:text-[62px] lg:text-[74px] text-ivory leading-[1.04] font-medium"
         >
           <span className="inline-block">Giovanni</span>
           <span className="inline-block mx-3 md:mx-4" aria-hidden="true">
@@ -64,21 +64,21 @@ const HeroSection = () => {
         >
           {/* Month with fine lines */}
           <div className="flex items-center justify-center gap-5 font-body text-gold text-[14px] md:text-[16px] tracking-[0.34em] uppercase">
-            <span className="h-px w-14 md:w-20 bg-gold" aria-hidden="true" />
+            <span className="h-px w-16 md:w-24 bg-gold" aria-hidden="true" />
             <span>{t("hero.month")}</span>
-            <span className="h-px w-14 md:w-20 bg-gold" aria-hidden="true" />
+            <span className="h-px w-16 md:w-24 bg-gold" aria-hidden="true" />
           </div>
 
           {/* Day */}
-          <div className="font-scriptDate text-ivory leading-none tracking-[-0.01em] text-[120px] md:text-[160px] lg:text-[190px] tabular-nums text-center">
+          <div className="font-display italic text-[46px] md:text-[62px] lg:text-[74px] text-ivory leading-[1.04] font-medium">
             <span className="inline-block">27</span>
           </div>
 
           {/* Year with fine lines */}
-          <div className="flex items-center justify-center gap-5 font-body text-gold text-[14px] md:text-[16px] tracking-[0.34em] tabular-nums">
-            <span className="h-px w-14 md:w-20 bg-gold" aria-hidden="true" />
+          <div className="flex items-center justify-center gap-5 font-body font-medium text-gold text-[15px] md:text-[17px] tracking-[0.26em] tabular-nums uppercase">
+            <span className="h-px w-16 md:w-24 bg-gold" aria-hidden="true" />
             <span>2026</span>
-            <span className="h-px w-14 md:w-20 bg-gold" aria-hidden="true" />
+            <span className="h-px w-16 md:w-24 bg-gold" aria-hidden="true" />
           </div>
         </motion.div>
 

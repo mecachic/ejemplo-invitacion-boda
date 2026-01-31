@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-      scriptDate: ['\"Playfair Display\"', 'serif'],
+      scriptDate: ['Cormorant Garamond', 'serif'],
         display: ['Cormorant Garamond', 'serif'],
         // Prefer Söhne when available (commercial font). Fallback keeps the look consistent.
         body: ['Söhne', 'Montserrat', 'sans-serif'],
