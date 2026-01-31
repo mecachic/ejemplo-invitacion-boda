@@ -50,7 +50,8 @@ const HeroSection = () => {
         >
           <span className="inline-block">Giovanni</span>
           <span
-            className="inline-block mx-4 md:mx-6 text-gold/85 font-medium tracking-[0.08em]"
+            // Simpler, more elegant ampersand: smaller, no tracking, different font for contrast.
+            className="inline-block mx-3 md:mx-5 text-gold/85 font-display text-[0.68em] leading-none"
             aria-hidden="true"
           >
             &amp;
@@ -75,7 +76,8 @@ const HeroSection = () => {
 
           {/* Day */}
           <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px]">
-            27
+            {/* Optical centering: this font's numerals have asymmetric side-bearings */}
+            <span className="inline-block translate-x-[0.04em]">27</span>
           </div>
 
           {/* Diamond */}

@@ -92,7 +92,9 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed left-1/2 -translate-x-1/2 w-full flex justify-center inset-0 z-50 cursor-pointer"
+          // Use inset-0 (instead of centering hacks) to guarantee perfect centering
+          // on any viewport size (mobile/web) without sub-pixel drift.
+          className="fixed inset-0 w-full h-full flex items-center justify-center z-50 cursor-pointer"
           onClick={handleClick}
           role="button"
           aria-label={t('intro.aria.open')}
