@@ -49,7 +49,11 @@ const HeroSection = () => {
           className="font-display italic text-[46px] md:text-[62px] lg:text-[74px] text-ivory leading-[1.04] font-medium"
         >
           <span className="inline-block">Giovanni</span>
-          <span className="inline-block mx-3 md:mx-4" aria-hidden="true">
+          {/* Ampersand must be simple and GOLD (no decorative glyph) */}
+          <span
+            className="inline-block mx-3 md:mx-4 text-gold"
+            aria-hidden="true"
+          >
             &amp;
           </span>
           <span className="inline-block">Sara</span>
@@ -63,22 +67,22 @@ const HeroSection = () => {
           className="mt-10 flex flex-col items-center gap-7"
         >
           {/* Month with fine lines */}
-          <div className="flex items-center justify-center gap-5 font-body text-gold text-[14px] md:text-[16px] tracking-[0.34em] uppercase">
-            <span className="gold-fade-line w-16 md:w-24" aria-hidden="true" />
+          <div className="flex items-center justify-center gap-5 font-body font-semibold text-gold text-[15px] md:text-[17px] tracking-[0.30em] uppercase">
+            <span className="gold-fade-line w-20 md:w-28" aria-hidden="true" />
             <span>{t("hero.month")}</span>
-            <span className="gold-fade-line w-16 md:w-24" aria-hidden="true" />
+            <span className="gold-fade-line w-20 md:w-28" aria-hidden="true" />
           </div>
 
-          {/* Day */}
-          <div className="font-display italic text-[46px] md:text-[62px] lg:text-[74px] text-ivory leading-[1.04] font-medium">
+          {/* Day (must dominate; roman, not fragile/italic) */}
+          <div className="font-display text-[54px] md:text-[72px] lg:text-[86px] text-ivory leading-[1.0] font-semibold tracking-[-0.02em]">
             <span className="inline-block">27</span>
           </div>
 
           {/* Year with fine lines */}
-          <div className="flex items-center justify-center gap-5 font-body font-medium text-gold text-[15px] md:text-[17px] tracking-[0.26em] tabular-nums uppercase">
-            <span className="gold-fade-line w-16 md:w-24" aria-hidden="true" />
+          <div className="flex items-center justify-center gap-5 font-body font-semibold text-gold text-[15px] md:text-[17px] tracking-[0.26em] tabular-nums uppercase">
+            <span className="gold-fade-line w-20 md:w-28" aria-hidden="true" />
             <span>2026</span>
-            <span className="gold-fade-line w-16 md:w-24" aria-hidden="true" />
+            <span className="gold-fade-line w-20 md:w-28" aria-hidden="true" />
           </div>
         </motion.div>
 
@@ -90,7 +94,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.9 }}
-          className="font-body text-gold tracking-[0.26em] uppercase mb-[12vh] text-[11px] md:text-[12px]"
+          className="font-body font-semibold text-gold tracking-[0.26em] uppercase mb-[12vh] text-[11px] md:text-[12px] location-shadow"
         >
           {t("hero.location")}
         </motion.p>
