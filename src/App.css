@@ -40,3 +40,24 @@
 .read-the-docs {
   color: #888;
 }
+
+
+/* --- Editorial date axis (27 centered) --- */
+.date-axis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.axis-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.85);
+}
+
+.axis-day {
+  line-height: 1;
+  text-align: center;
+}
