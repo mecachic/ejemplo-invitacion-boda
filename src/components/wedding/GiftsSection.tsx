@@ -7,7 +7,7 @@ import { useI18n } from "@/i18n/I18nContext";
  * TODO: Sustituye este IBAN por el vuestro real antes de publicar.
  * Recomendación: si prefieres no dejarlo en abierto, puedes cargarlo desde una env var.
  */
-const DEFAULT_IBAN = "IT12V0760103400001015114455";
+const DEFAULT_IBAN = "ES00 XXXX XXXX XXXX XXXX XXXX";
 
 function copyToClipboard(text: string) {
   // Clipboard API (preferente)
