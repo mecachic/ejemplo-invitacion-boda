@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Plane, CreditCard, Copy, Check } from "lucide-react";
+import { CreditCard, Copy, Check } from "lucide-react";
 import { useI18n } from "@/i18n/I18nContext";
 
 /**
@@ -76,26 +76,7 @@ const GiftsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-10">
-          {/* Viaje futuro */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="text-center p-8"
-          >
-            <div className="w-16 h-16 rounded-full bg-sage-light/30 flex items-center justify-center mx-auto mb-6">
-              <Plane className="w-7 h-7 text-primary" />
-            </div>
-
-            <h3 className="heading-display text-xl text-foreground mb-3">{t('gifts.trip.title')}</h3>
-
-            <p className="text-body text-muted-foreground text-sm">
-              {t('gifts.trip.body')}
-            </p>
-          </motion.div>
-
+        <div className="grid md:grid-cols-1 gap-10">
           {/* Aportación / IBAN */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

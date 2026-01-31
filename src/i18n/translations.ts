@@ -107,11 +107,8 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.kicker": "VUESTRA GENEROSIDAD",
     "gifts.title": "Regalos",
     "gifts.intro":
-      "Vuestra presencia es el mejor regalo. Si aun así os apetece tener un detalle con nosotros, dejamos aquí dos opciones, siempre de forma totalmente opcional.",
-    "gifts.trip.title": "Viaje futuro",
-    "gifts.trip.body":
-      "No haremos luna de miel justo después de la boda. Más adelante nos gustaría realizar un viaje especial, y Japón es uno de nuestros grandes sueños. Si queréis contribuir a hacerlo realidad, os lo agradeceremos muchísimo.",
-    "gifts.contrib.title": "Aportación",
+      "Vuestra presencia será el mejor regalo. Si además os apetece tener un detalle con nosotros, a continuación encontraréis las instrucciones.",
+        "gifts.contrib.title": "Aportación",
     "gifts.contrib.body":
       "Para quienes prefieran hacer una aportación, os dejamos los datos de forma discreta. No es en absoluto necesario, pero será recibido con enorme cariño.",
     "gifts.iban.show": "Ver IBAN",
@@ -269,9 +266,8 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.kicker": "LA VOSTRA GENEROSITÀ",
     "gifts.title": "Regali",
     "gifts.intro":
-      "La vostra presenza è il regalo più bello. Se però vi va di farci un pensiero, qui sotto trovate due opzioni, sempre del tutto facoltative.",
-    "gifts.trip.body":
-    "gifts.contrib.title": "Contributo",
+      "La vostra presenza sarà il regalo più bello. Se nel contempo vi va di farci un pensiero, qui sotto troverete le istruzioni.",
+        "gifts.contrib.title": "Contributo",
     "gifts.contrib.body":
       "Per chi preferisce fare un contributo, lasciamo i dati in modo discreto. Non è assolutamente necessario, ma sarà accolto con grande affetto.",
     "gifts.iban.show": "Mostra IBAN",
@@ -438,11 +434,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "gifts.kicker": "EURE GROSSZÜGIGKEIT",
     "gifts.title": "Geschenke",
     "gifts.intro":
-      "Eure Anwesenheit ist das schönste Geschenk. Wenn ihr uns trotzdem eine Freude machen möchtet, findet ihr hier zwei optionale Möglichkeiten.",
-    "gifts.trip.title": "Zukünftige Reise",
-    "gifts.trip.body":
-      "Wir machen direkt nach der Hochzeit keine Hochzeitsreise. Später möchten wir eine besondere Reise machen – Japan ist einer unserer großen Träume. Wenn ihr dazu beitragen möchtet, freuen wir uns sehr.",
-    "gifts.contrib.title": "Beitrag",
+      "Eure Anwesenheit wird das schönste Geschenk sein. Falls ihr uns zusätzlich eine Freude machen möchtet, findet ihr unten die entsprechenden Hinweise.",    "gifts.contrib.title": "Beitrag",
     "gifts.contrib.body":
       "Für alle, die lieber einen Beitrag geben möchten: Hier sind die Daten diskret hinterlegt. Es ist absolut nicht nötig, aber wir nehmen es mit viel Dankbarkeit an.",
     "gifts.iban.show": "IBAN anzeigen",
