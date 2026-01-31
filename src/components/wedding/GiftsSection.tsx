@@ -92,7 +92,6 @@ const GiftsSection = () => {
             <h3 className="heading-display text-xl text-foreground mb-3">{t('gifts.contrib.title')}</h3>
 
             <p className="text-body text-muted-foreground text-sm mb-6">
-              {t('gifts.contrib.body')}
             </p>
 
             <button
