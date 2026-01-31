@@ -50,8 +50,8 @@ const HeroSection = () => {
         >
           <span className="inline-block">Giovanni</span>
           <span
-            // Keep it editorial but proportional: same family as names, smaller, subtle gold.
-            className="inline-block mx-3 md:mx-5 text-gold/85 font-scriptDate text-[0.52em] leading-none -translate-y-[0.02em]"
+            // Cleaner & more present (connects the names without looking tiny).
+            className="inline-block mx-3 md:mx-4 text-gold/90 font-display font-medium tracking-[0.02em] text-[0.9em] md:text-[0.92em] align-middle translate-y-[0.02em]"
             aria-hidden="true"
           >
             &amp;
@@ -75,9 +75,9 @@ const HeroSection = () => {
           <div className="w-2.5 h-2.5 rotate-45 bg-white" aria-hidden="true" />
 
           {/* Day */}
-          <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px]">
-            {/* Optical centering: this font's numerals have asymmetric side-bearings */}
-            <span className="inline-block -translate-x-[0.055em]">27</span>
+          <div className="font-scriptDate text-ivory leading-none tracking-[-0.02em] text-[120px] md:text-[160px] lg:text-[190px] tabular-nums text-center">
+            {/* Optical centering: tabular nums + left nudge for this font's '2'/'7' side bearings */}
+            <span className="inline-block -translate-x-[0.075em]">27</span>
           </div>
 
           {/* Diamond */}

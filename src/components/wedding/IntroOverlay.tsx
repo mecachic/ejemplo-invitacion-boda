@@ -92,9 +92,11 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          // Use inset-0 (instead of centering hacks) to guarantee perfect centering
-          // on any viewport size (mobile/web) without sub-pixel drift.
-          className="fixed inset-0 w-full h-full flex items-center justify-center z-50 cursor-pointer"
+          // IMPORTANT:
+          // Avoid any centering via transforms on the root overlay.
+          // A parent transform can cause sub-pixel drift and will make the
+          // "Tap to open" look off-center on some viewports.
+          className="fixed inset-0 z-50 cursor-pointer"
           onClick={handleClick}
           role="button"
           aria-label={t('intro.aria.open')}
@@ -132,35 +134,40 @@ const IntroOverlay = ({ onComplete }: IntroOverlayProps) => {
 
             {/* Tap to open */}
             <motion.div
-              // Use inset-x-0 + flex centering to avoid any translate/subpixel drift
-              // and keep it perfectly centered on every viewport.
-              className="absolute inset-x-0 bottom-[calc(5rem+env(safe-area-inset-bottom))] flex flex-col items-center text-center px-6"
+              // Center robustly across all widths: stretch full width and center the content.
+              // Use safe-area for iOS so it stays visually centered and not "floating".
+              className="absolute inset-x-0 bottom-20 text-center flex justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: isClicked ? 0 : 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              <p className="text-label text-ivory/80 mb-2">{t('intro.tap')}</p>
-
-              <motion.div
-                className="w-8 h-8 mx-auto border border-ivory/40 rounded-full flex items-center justify-center"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              <div
+                className="flex flex-col items-center"
+                style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
               >
-                <svg
-                  className="w-4 h-4 text-ivory/60"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+                <p className="text-label text-ivory/80 mb-2">{t('intro.tap')}</p>
+
+                <motion.div
+                  className="w-8 h-8 border border-ivory/40 rounded-full flex items-center justify-center"
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M12 4v16m0 0l-4-4m4 4l4-4"
-                  />
-                </svg>
-              </motion.div>
+                  <svg
+                    className="w-4 h-4 text-ivory/60"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M12 4v16m0 0l-4-4m4 4l4-4"
+                    />
+                  </svg>
+                </motion.div>
+              </div>
             </motion.div>
 
             {/* Flash overlay (radial expanding) */}
