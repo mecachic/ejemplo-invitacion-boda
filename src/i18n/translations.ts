@@ -280,7 +280,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     "rsvp.kicker": "CONFERMA",
     "rsvp.title": "RSVP",
     "rsvp.deadline": "Per favore rispondete entro il ",
-    "rsvp.deadline.date": "1 aprile 2026",
+    "rsvp.deadline.date": "1 Maggio 2026",
     "rsvp.name.label": "Nome e cognome *",
     "rsvp.name.placeholder": "Scrivi il tuo nome",
     "rsvp.email.label": "Email *",
